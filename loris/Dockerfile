@@ -33,9 +33,9 @@ RUN ln -snf "/usr/share/zoneinfo/$TZ" /etc/localtime && \
     adduser --disabled-password --gecos "" loris
 
 WORKDIR /opt
-RUN mkdir loris && \
-    wget --quiet https://github.com/loris-imageserver/loris/archive/refs/tags/v3.2.1.tar.gz && \
-    tar -zxvf v3.2.1.tar.gz -C /opt/loris
+RUN wget --quiet https://github.com/loris-imageserver/loris/archive/refs/tags/v3.2.1.tar.gz && \
+    tar -zxvf v3.2.1.tar.gz && \
+    mv loris-3.2.1 loris
 
 WORKDIR /opt/loris
 RUN python3 setup.py install && \
