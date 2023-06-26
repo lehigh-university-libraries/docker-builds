@@ -1,0 +1,19 @@
+name: Build and push PHP 8.1
+on:
+  push:
+    paths:
+      - 'php/**'
+      - '.github/workflows/php-81.yml'
+    paths-ignore:
+      - '**.md'
+
+jobs:
+  deploy:
+    uses: ./.github/workflows/build-push.yml
+    with:
+      build_arg: PHP_VERSION=8.1.20
+      dir: php
+    permissions:
+      contents: read
+      id-token: write
+    secrets: inherit
