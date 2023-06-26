@@ -51,9 +51,8 @@ jobs:
 
     - name: Lint Dockerfile
       uses: hadolint/hadolint-action@v3.1.0
-      working-directory: ${{ inputs.dir }}
       with:
-        dockerfile: Dockerfile
+        dockerfile: ${{ inputs.dir }}/Dockerfile
 
     - name: Lint shell
       working-directory: ${{ inputs.dir }}
@@ -65,9 +64,8 @@ jobs:
 
     - name: Build and push
       uses: docker/build-push-action@v3
-      working-directory: ${{ inputs.dir }}
       with:
-        context: .
+        context: ${{ inputs.dir }}
         push: true
         build-args: ${{ inputs.build_arg }}
         tags: |
