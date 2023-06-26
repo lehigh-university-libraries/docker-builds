@@ -6,8 +6,8 @@ ENV PROXY_URL=https://loris.iiif.example.com
 ENV CORS_REGEX=''
 
 WORKDIR /opt
-RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && \
-    echo $TZ > /etc/timezone && \
+RUN ln -snf /usr/share/zoneinfo/"$TZ" /etc/localtime && \
+    echo "$TZ" > /etc/timezone && \
     apt-get -y upgrade && \
     apt-get update && \
     apt-get -y install python3-pip=20.0.2-5ubuntu1.9 \
