@@ -4,6 +4,7 @@ on:
     paths:
       - 'php/**'
       - '.github/workflows/php-81.yml'
+      - '.github/workflows/build-push.yml'
 
 jobs:
   deploy:
