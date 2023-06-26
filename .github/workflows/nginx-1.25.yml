@@ -1,0 +1,19 @@
+name: Build and push nginx 1.25
+on:
+  push:
+    paths:
+      - 'nginx/**'
+      - '.github/workflows/nginx-1.25.yml'
+      - '.github/workflows/build-push.yml'
+
+jobs:
+  deploy:
+    uses: ./.github/workflows/build-push.yml
+    with:
+      dir: nginx
+      major_version: 1.25
+      build_arg: NGINX_VERSION=1.25.1
+    permissions:
+      contents: read
+      id-token: write
+    secrets: inherit
