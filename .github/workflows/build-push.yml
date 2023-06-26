@@ -2,10 +2,13 @@ name: Workflow Template - Build and push
 on:
   workflow_call:
     inputs:
-      build_arg:
-        type: string
       dir:
         required: true
+        type: string
+      major_version:
+        required: true
+        type: string
+      build_arg:
         type: string
 jobs:
   build-push:
