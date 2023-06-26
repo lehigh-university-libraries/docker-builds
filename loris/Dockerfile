@@ -32,7 +32,7 @@ RUN ln -snf /usr/share/zoneinfo/"$TZ" "/etc/localtime" && \
          requests==2.31.0 \
          mock==5.0.2 \
          responses==0.23.1 && \
-    adduser loris && \
+    adduser --disabled-password --gecos "" loris && \
     wget --quiet https://github.com/loris-imageserver/loris/archive/refs/tags/v"$LORIS_VERSION".tar.gz && \
     tar -zxvf v"$LORIS_VERSION".tar.gz && \
     ln -s loris-"$LORIS_VERSION" loris
