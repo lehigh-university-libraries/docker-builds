@@ -47,7 +47,7 @@ RUN useradd -m -d /code -u 1080 php \
   && chown -R php /code /public /private \
   && chmod -R 755 /code /public /private
 
-#USER php
+USER php
 
 WORKDIR /code/web
 
