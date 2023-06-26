@@ -1,12 +1,10 @@
-ARG LORIS_VERSION=3.2.1
 FROM ubuntu:focal
 
 ENV TZ=Etc/UTC
 ENV PROXY_URL=https://loris.iiif.example.com
 ENV CORS_REGEX=''
 
-WORKDIR /opt
-RUN ln -snf /usr/share/zoneinfo/"$TZ" "/etc/localtime" && \
+RUN ln -snf "/usr/share/zoneinfo/$TZ" /etc/localtime && \
     echo "$TZ" > /etc/timezone && \
     apt-get -y upgrade && \
     apt-get update && \
@@ -32,10 +30,11 @@ RUN ln -snf /usr/share/zoneinfo/"$TZ" "/etc/localtime" && \
          requests==2.31.0 \
          mock==5.0.2 \
          responses==0.23.1 && \
-    adduser --disabled-password --gecos "" loris && \
-    wget --quiet https://github.com/loris-imageserver/loris/archive/refs/tags/v"$LORIS_VERSION".tar.gz && \
-    tar -zxvf v"$LORIS_VERSION".tar.gz && \
-    ln -s loris-"$LORIS_VERSION" loris
+    adduser --disabled-password --gecos "" loris
+
+WORKDIR /opt
+RUN wget --quiet https://github.com/loris-imageserver/loris/archive/refs/tags/v3.2.1.tar.gz && \
+    tar -zxvf v3.2.1.tar.gz -C /opt/loris
 
 WORKDIR /opt/loris
 RUN python3 setup.py install && \
