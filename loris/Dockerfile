@@ -33,7 +33,8 @@ RUN ln -snf "/usr/share/zoneinfo/$TZ" /etc/localtime && \
     adduser --disabled-password --gecos "" loris
 
 WORKDIR /opt
-RUN wget --quiet https://github.com/loris-imageserver/loris/archive/refs/tags/v3.2.1.tar.gz && \
+RUN mkdir loris && \
+    wget --quiet https://github.com/loris-imageserver/loris/archive/refs/tags/v3.2.1.tar.gz && \
     tar -zxvf v3.2.1.tar.gz -C /opt/loris
 
 WORKDIR /opt/loris
