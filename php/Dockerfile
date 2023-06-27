@@ -30,7 +30,7 @@ RUN chmod +x /usr/local/bin/install-php-extensions && \
 
 RUN apt-get update \
   && apt-get -y upgrade \
-  && apt-get -y install default-mysql-client=1.1.0 jq=1.6-2.1 rsync=3.2.7-1 --no-install-recommends \
+  && apt-get -y install default-mysql-client=1.1.0 jq=1.6-2.1 rsync=3.2.7-1 git=1:2.39.2-1.1 --no-install-recommends \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
 
