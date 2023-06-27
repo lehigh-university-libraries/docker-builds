@@ -1,5 +1,27 @@
 # Docker builds
 
-Ideally we want to use existing docker containers.
+Various docker containers used within Lehigh Libraries infrastructure.
 
-For those cases where we need to build our own, we can define them in this repository.
+## Structure
+
+```
+|-- ./.github/workflows/image1.yml
+|-- ./.github/workflows/image2.yml
+...
+...
+...
+|-- ./.github/workflows/imageN.yml
+|-- ./image1
+|   `-- ./image1/Dockerfile
+|-- ./image2
+|   `-- ./image2/Dockerfile
+...
+...
+...
+|-- ./imageN
+|   `-- ./imageN/Dockerfile
+```
+
+Each docker image is defined within its own directory.
+
+The image then has a GitHub action defined in [.github/workflows](./.github/workflows) that uses the base [build-push GitHub Action workflow](./.github/workflows/build-push.yml) to push images to Google Artifact Registry.
