@@ -1,4 +1,4 @@
-name: Build and push PHP
+name: CI
 on:
   push:
     paths:
@@ -12,13 +12,18 @@ jobs:
       fail-fast: false
       matrix:
         version: ["8.1", "8.2"]
+
     name: Build and push PHP ${{ matrix.version }}
+
     uses: ./.github/workflows/build-push.yml
+
     with:
       dir: php
       major_version: ${{ matrix.version }}
       build_arg: PHP_VERSION=${{ matrix.version }}
+
     permissions:
       contents: read
       id-token: write
+
     secrets: inherit
