@@ -3,5 +3,5 @@
 For use in themes using gulp for asset generation
 
 ```
-Rebuild count: 0
+Rebuild count: 1
 ```
