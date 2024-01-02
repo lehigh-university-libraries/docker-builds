@@ -35,11 +35,12 @@ jobs:
               echo '{"context":"'${REPO}'", "image":"'${REPO}'-'${TAG}'", "args":"'$(cat ${REPO}/.build-args/${TAG})'"},'
             done
           done <<< "$json_array")
-          TAGS=$(echo "[${TAGS%,}]")
+          TAGS=$(echo "[${TAGS%,}]" | tr -d '\n')
           echo $TAGS | jq .
           echo "tags=$TAGS" >> $GITHUB_OUTPUT
 
   build-push-ar:
+    name: "Build and push ${{ matrix.tags.image }} to Google Artifact Registry"
     needs: [get-tags]
     strategy:
       matrix:
