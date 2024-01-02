@@ -5,23 +5,22 @@ Various docker containers used within Lehigh Libraries infrastructure.
 ## Structure
 
 ```
-|-- ./.github/workflows/image1.yml
-|-- ./.github/workflows/image2.yml
-...
-...
-...
-|-- ./.github/workflows/imageN.yml
 |-- ./image1
 |   `-- ./image1/Dockerfile
+|   `-- ./image1/.build-args/TAG1
+|   `-- ./image1/.build-args/TAG2
 |-- ./image2
 |   `-- ./image2/Dockerfile
+|   `-- ./image2/.build-args/TAG1
 ...
 ...
 ...
 |-- ./imageN
 |   `-- ./imageN/Dockerfile
+|   `-- ./imageN/.build-args/TAG1
+
 ```
 
 Each docker image is defined within its own directory.
 
-The image then has a GitHub action defined in [.github/workflows](./.github/workflows) that uses the base [build-push GitHub Action workflow](./.github/workflows/build-push.yml) to push images to Google Artifact Registry.
+The image then has a `.build-args` directory. That directory contains a file that is represents a specific version for the tag. The file then contains any `build-args` that may be needed for the docker build.
