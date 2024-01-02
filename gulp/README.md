@@ -1,6 +1,6 @@
 # gulp
 
-For use in themes based on gulp that need assets generated
+For use in themes using gulp for asset generation
 
 ```
 Rebuild count: 0

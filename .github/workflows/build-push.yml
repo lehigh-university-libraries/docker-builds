@@ -28,6 +28,9 @@ jobs:
         run: |
           json_array=$(echo '${{ needs.find-jobs.outputs.folders }}' | jq -rc '.[]')
           TAGS=$(while read -r REPO; do
+            if [ ! -d $REPO/.build-args ]; then
+              continue;
+            fi
             for TAG in $(ls $REPO/.build-args); do
               echo '{"context":"'${REPO}'", "image":"'${REPO}'-'${TAG}'", "args":"'$(cat ${REPO}/.build-args/${TAG})'"},'
             done
@@ -40,12 +43,12 @@ jobs:
     needs: [get-tags]
     strategy:
       matrix:
-        tags: ${{ fromJson(needs.get-tags.outputs.tags )}}
+        tags: ${{ fromJson(needs.get-tags.outputs.tags) }}
     uses: ./.github/workflows/build-push-ar.yml
     with:
-      image: "internal/${{ matrix.image }}"
-      context: ${{ matrix.context }}
-      build-args: ${{ matrix.args }}
+      image: "internal/${{ matrix.tags.image }}"
+      context: ${{ matrix.tags.context }}
+      build-args: ${{ matrix.tags.args }}
     permissions:
       contents: read
       id-token: write
