@@ -1,76 +1,50 @@
-name: Workflow Template - Build and push
+name: build-push
 on:
-  workflow_call:
-    inputs:
-      dir:
-        required: true
-        type: string
-      major_version:
-        required: true
-        type: string
-      build_arg:
-        type: string
+  push:
 jobs:
-  build-push:
+  find-jobs:
+    name: Find changed directories
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    outputs:
+      folders: ${{ steps.jobs.outputs.folders }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - id: jobs
+        run: |
+          folders=$(git diff --diff-filter="ACMR" --name-only ${{ github.event.before }} ${{ github.event.after }} | xargs dirname | awk -F '/' '{print $1}' | sort | uniq | grep -Ev "^\." | awk NF | jq -c --raw-input --slurp 'split("\n") | .[0:-1]')
+          echo "folders=$folders" >> $GITHUB_OUTPUT
+
+  get-tags:
+    needs: [find-jobs]
+    runs-on: ubuntu-latest
+    outputs:
+      tags: ${{ steps.tags.outputs.tags }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: tags
+        run: |
+          json_array=$(echo '${{ needs.find-jobs.outputs.folders }}' | jq -rc '.[]')
+          TAGS=$(while read -r REPO; do
+            for TAG in $(ls $REPO/.build-args); do
+              echo '{"context":"'${REPO}'", "image":"'${REPO}':'${TAG}'", "args":"'$(cat ${REPO}/.build-args/${TAG})'"},'
+            done
+          done <<< "$json_array")
+          TAGS=$(echo "[${TAGS%,}]")
+          echo "tags=$TAGS" >> $GITHUB_OUTPUT
+
+  build-push-ar:
+    needs: [get-tags]
+    strategy:
+      matrix:
+        tags: ${{ fromJson(needs.get-tags.outputs.tags )}}
+    uses: ./.github/workflows/build-push-ar.yml
+    with:
+      image: "internal/${{ matrix.image }}"
+      context: ${{ matrix.context }}
+      build-args: ${{ matrix.args }}
     permissions:
       contents: read
       id-token: write
-    steps:
-
-    - name: Extract branch name
-      shell: bash
-      run: echo "branch=${GITHUB_REF#refs/heads/}"  >> $GITHUB_OUTPUT
-      id: extract_branch
-
-    - name: Extract tag name
-      shell: bash
-      run: |-
-        t=$(echo ${GITHUB_SHA} | cut -c1-7)
-        echo "tag=$t" >> $GITHUB_OUTPUT
-      id: extract_tag
-
-    - uses: 'actions/checkout@v3'
-
-    - name: 'Authenticate to Google Cloud'
-      id: 'auth'
-      uses: 'google-github-actions/auth@v0'
-      with:
-        workload_identity_provider: ${{ secrets.GCLOUD_OIDC_POOL }}
-        create_credentials_file: true
-        service_account: ${{ secrets.GSA }}
-        token_format: 'access_token'
-
-    - name: 'Docker login init'
-      uses: 'docker/login-action@v1'
-      with:
-        registry: 'us-docker.pkg.dev'
-        username: 'oauth2accesstoken'
-        password: '${{ steps.auth.outputs.access_token }}'
-
-    - name: 'Docker login'
-      run: echo '${{ steps.auth.outputs.access_token }}' | docker login -u oauth2accesstoken --password-stdin https://us-docker.pkg.dev
-
-    - name: Lint Dockerfile
-      uses: hadolint/hadolint-action@v3.1.0
-      with:
-        dockerfile: ${{ inputs.dir }}/Dockerfile
-
-    - name: Lint shell
-      working-directory: ${{ inputs.dir }}
-      run: |-
-        echo "Running shellcheck on"
-        find . -name "*.sh" -exec ls -l {} \;
-        echo "Starting..."
-        find . -name "*.sh" -exec shellcheck {} \;
-
-    - name: Build and push
-      uses: docker/build-push-action@v3
-      with:
-        context: ${{ inputs.dir }}
-        push: true
-        build-args: ${{ inputs.build_arg }}
-        tags: |
-          us-docker.pkg.dev/${{ secrets.GCLOUD_PROJECT }}/${{ secrets.GCLOUD_AR_REPO }}/${{ inputs.dir }}:${{ inputs.major_version }}-${{steps.extract_branch.outputs.branch}}-${{steps.extract_tag.outputs.tag}}
-          us-docker.pkg.dev/${{ secrets.GCLOUD_PROJECT }}/${{ secrets.GCLOUD_AR_REPO }}/${{ inputs.dir }}:${{ inputs.major_version }}-${{steps.extract_branch.outputs.branch}}
+    secrets: inherit
