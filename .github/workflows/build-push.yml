@@ -14,6 +14,7 @@ jobs:
       - id: jobs
         run: |
           folders=$(git diff --diff-filter="ACMR" --name-only ${{ github.event.before }} ${{ github.event.after }} | xargs dirname | awk -F '/' '{print $1}' | sort | uniq | grep -Ev "^\." | awk NF | jq -c --raw-input --slurp 'split("\n") | .[0:-1]')
+          echo $folders | jq .
           echo "folders=$folders" >> $GITHUB_OUTPUT
 
   get-tags:
@@ -28,10 +29,11 @@ jobs:
           json_array=$(echo '${{ needs.find-jobs.outputs.folders }}' | jq -rc '.[]')
           TAGS=$(while read -r REPO; do
             for TAG in $(ls $REPO/.build-args); do
-              echo '{"context":"'${REPO}'", "image":"'${REPO}':'${TAG}'", "args":"'$(cat ${REPO}/.build-args/${TAG})'"},'
+              echo '{"context":"'${REPO}'", "image":"'${REPO}'-'${TAG}'", "args":"'$(cat ${REPO}/.build-args/${TAG})'"},'
             done
           done <<< "$json_array")
           TAGS=$(echo "[${TAGS%,}]")
+          echo $TAGS | jq .
           echo "tags=$TAGS" >> $GITHUB_OUTPUT
 
   build-push-ar:
