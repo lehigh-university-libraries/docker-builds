@@ -5,3 +5,7 @@
 ## Attribution
 
 This docker image is licensed under [AGPLv3](./LICENSE) in accordance with grok's license: https://github.com/GrokImageCompression/grok
+
+Please also see [cantaloupe's license](./LICENSE.cantaloupe)
+
+Thank you to both open source communities!
