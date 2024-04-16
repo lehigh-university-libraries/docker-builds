@@ -29,7 +29,8 @@ jobs:
           json_array=$(echo '${{ needs.find-jobs.outputs.folders }}' | jq -rc '.[]')
           TAGS=$(while read -r REPO; do
             if [ ! -d $REPO/.build-args ]; then
-              continue;
+              echo '{"context":"'${REPO}'", "image":"'${REPO}'", "args":""},'
+              continue
             fi
             for TAG in $(ls $REPO/.build-args); do
               echo '{"context":"'${REPO}'", "image":"'${REPO}'-'${TAG}'", "args":"'$(cat ${REPO}/.build-args/${TAG})'"},'
