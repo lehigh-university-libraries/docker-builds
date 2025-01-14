@@ -1,4 +1,4 @@
-FROM islandora/cantaloupe:3.2.1
+FROM islandora/cantaloupe:3.4
 
 RUN apk add --no-cache \
     gcc \
@@ -16,7 +16,7 @@ RUN apk add --no-cache \
     libwebp-dev \
   && git clone https://github.com/GrokImageCompression/grok \
   && cd grok \
-  && git checkout v12.0.0 \
+  && git checkout v14.2.0 \
   && cmake . \
   && make install \
   && apk del \
@@ -32,3 +32,5 @@ RUN apk add --no-cache \
     jpeg-dev \
     zlib-dev \
     libwebp-dev
+
+HEALTHCHECK CMD curl -s http://localhost:8182/health | jq .color | grep -q GREEN
