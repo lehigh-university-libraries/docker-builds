@@ -4,7 +4,7 @@ on:
 jobs:
   find-jobs:
     name: Find changed directories
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     outputs:
       folders: ${{ steps.jobs.outputs.folders }}
     steps:
@@ -19,7 +19,7 @@ jobs:
 
   get-tags:
     needs: [find-jobs]
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     outputs:
       tags: ${{ steps.tags.outputs.tags }}
     steps:

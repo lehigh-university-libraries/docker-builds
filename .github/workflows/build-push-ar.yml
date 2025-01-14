@@ -15,43 +15,47 @@ on:
         default: "."
 jobs:
   build-push-ar:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 15
     permissions:
       contents: read
       id-token: write
     steps:
     - uses: 'actions/checkout@v4'
+
     - name: Extract branch name
       shell: bash
       run: echo "branch=${GITHUB_REF#refs/heads/}"  >> $GITHUB_OUTPUT
       id: extract_branch
-    - name: Extract tag name
-      shell: bash
-      run: |-
-        t=$(echo ${GITHUB_SHA} | cut -c1-7)
-        echo "tag=$t" >> $GITHUB_OUTPUT
-      id: extract_tag
+
+    - name: Set up QEMU
+      uses: docker/setup-qemu-action@49b3bc8e6bdd4a60e6116a5414239cba5943d3cf # v3
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@6524bf65af31da8d45b59e8c27de4bd072b392f5 # v3
+
     - id: 'auth'
       name: 'Authenticate to Google Cloud'
-      uses: 'google-github-actions/auth@v1'
+      uses: 'google-github-actions/auth@v2'
       with:
         workload_identity_provider: ${{ secrets.GCLOUD_OIDC_POOL }}
         create_credentials_file: true
         service_account: ${{ secrets.GSA }}
         token_format: 'access_token'
+
     - uses: 'docker/login-action@v3'
       name: 'Docker login'
       with:
         registry: 'us-docker.pkg.dev'
         username: 'oauth2accesstoken'
         password: '${{ steps.auth.outputs.access_token }}'
+
     - name: Build and push
-      uses: docker/build-push-action@v5
+      uses: docker/build-push-action@48aba3b46d1b1fec4febb7c5d0c644b249a11355 # v6
       with:
         context: ${{ inputs.context }}
+        platforms: "linux/amd64,linux/arm64/v8"
         push: true
         build-args: ${{ inputs.build-args }}
         tags: |
-          us-docker.pkg.dev/${{ secrets.GCLOUD_PROJECT }}/${{ inputs.image }}:${{steps.extract_branch.outputs.branch}}-${{steps.extract_tag.outputs.tag}}
           us-docker.pkg.dev/${{ secrets.GCLOUD_PROJECT }}/${{ inputs.image }}:${{steps.extract_branch.outputs.branch}}
