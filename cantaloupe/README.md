@@ -11,5 +11,5 @@ Please also see [cantaloupe's license](./LICENSE.cantaloupe)
 Thank you to both open source communities!
 
 ```
-Rebuild count: 0
+Rebuild count: 1
 ```
