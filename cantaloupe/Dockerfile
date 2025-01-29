@@ -27,7 +27,7 @@ RUN apk add --no-cache \
   && cd ../.. && rm -rf grok \
   && git clone https://github.com/GrokImageCompression/grok \
   && cd grok \
-  && git checkout v14.2.0 \
+  && git checkout v14.3.0 \
   && cmake . \
   && make install \
   && cd ../ && rm -rf grok \
