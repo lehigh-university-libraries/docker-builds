@@ -41,5 +41,3 @@ RUN apk add --no-cache \
     jpeg-dev \
     zlib-dev \
     libwebp-dev
-
-COPY --link rootfs /
