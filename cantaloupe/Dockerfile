@@ -1,7 +1,4 @@
-FROM islandora/cantaloupe:3.4
-
-ENV CANTALOUPE_ENDPOINT_API_ENABLED="true" \
-    CANTALOUPE_ENDPOINT_API_USERNAME=islandora
+FROM islandora/cantaloupe:3.5
 
 RUN apk add --no-cache \
     gcc \
@@ -46,7 +43,3 @@ RUN apk add --no-cache \
     libwebp-dev
 
 COPY --link rootfs /
-
-HEALTHCHECK CMD curl -s \
-  -u "${CANTALOUPE_ENDPOINT_API_USERNAME}:$(cat /var/run/s6/container_environment/CANTALOUPE_ENDPOINT_API_SECRET)" \
-  http://localhost:8182/health | jq .color | grep -q GREEN
