@@ -15,8 +15,7 @@ if [ ! -f ./svc.sh ]; then
     --unattended \
     --url "${GITHUB_REPO}" \
     --token "${GITHUB_RUNNER_TOKEN}" \
-    --labels "${LABELS:-ubuntu-24}" \
-    --work "${WORKDIR:-$(pwd)/_work"
+    --labels "${LABELS:-ubuntu-24}"
 fi
 
 sudo -u runner ./run.sh
