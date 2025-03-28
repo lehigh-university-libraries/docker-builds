@@ -13,8 +13,12 @@ ARG \
     CA_CERTIFICATES_VERSION=20240203 \
     # renovate: datasource=repology depName=ubuntu_24_04/curl
     CURL_VERSION=8.5.0-2ubuntu10.6 \
+    # renovate: datasource=repology depName=ubuntu_24_04/git
+    GIT_VERSION=1:2.43.0-1ubuntu7.2
     # renovate: datasource=repology depName=ubuntu_24_04/jq
     JQ_VERSION=1.7.1-3build1 \
+    # renovate: datasource=repology depName=ubuntu_24_04/make
+    MAKE_VERSION=4.3-4.1build2
     # renovate: datasource=repology depName=ubuntu_24_04/sudo
     SUDO_VERSION=1.9.15p5-3ubuntu5 \
     # renovate: datasource=repology depName=ubuntu_24_04/yq
@@ -37,7 +41,9 @@ RUN apt-get update && \
   apt-get install -y --no-install-recommends \
     ca-certificates=${CA_CERTIFICATES_VERSION} \
     curl=${CURL_VERSION} \
+    git=${GIT_VERSION} \
     jq=${JQ_VERSION} \
+    make=${MAKE_VERSION} \
     sudo=${SUDO_VERSION} \
     yq=${YQ_VERSION} \
     libicu-dev \
