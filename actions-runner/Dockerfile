@@ -73,6 +73,16 @@ RUN curl -o actions-runner.tar.gz -L https://github.com/actions/runner/releases/
   usermod -aG docker runner && \
   rm -rf /var/lib/apt/lists/*
 
+# renovate: datasource=github-releases depName=custom-composer packageName=composer/composer
+ARG COMPOSER_VERSION=2.8.6
+ARG COMPOSER_FILE=composer.phar
+ARG COMPOSER_URL=https://getcomposer.org/download/${COMPOSER_VERSION}/${COMPOSER_FILE}
+ARG COMPOSER_SHA256="becc28b909d2cca563e7caee1e488063312af36b1f2e31db64f417723b8c4026"
+RUN curl -sLo "${COMPOSER_FILE}" "${COMPOSER_URL}" && \
+    echo "${COMPOSER_SHA256}  ${COMPOSER_FILE}" | sha256sum -c && \
+    mv "${COMPOSER_FILE}" /usr/bin/composer && \
+    chmod a+x /usr/bin/composer
+
 COPY docker-entrypoint.sh .
 
 ENTRYPOINT [ "/app/docker-entrypoint.sh" ]
