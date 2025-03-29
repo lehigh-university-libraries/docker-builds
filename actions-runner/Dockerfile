@@ -61,7 +61,8 @@ RUN apt-get update && \
     php8.3-mysql="${PHP_VERSION}" \
     php8.3-opcache="${PHP_VERSION}" \
     php8.3-xml="${PHP_VERSION}" \
-    php8.3-zip="${PHP_VERSION}"
+    php8.3-zip="${PHP_VERSION}" \
+    zip
 
 RUN curl -o actions-runner.tar.gz -L https://github.com/actions/runner/releases/download/v${RUNNER_VERSION}/actions-runner-${RUNNER_PLATFORM}-${RUNNER_VERSION}.tar.gz && \
   echo "$RUNNER_SHA  actions-runner.tar.gz" | sha256sum -c && \
