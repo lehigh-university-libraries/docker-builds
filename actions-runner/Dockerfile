@@ -34,7 +34,11 @@ ARG \
     # renovate: datasource=repology depName=ubuntu_24_04/lsb-release-minimal
     LSB_VERSION=12.0-2 \
     # renovate: datasource=repology depName=ubuntu_24_04/php8.3
-    PHP_VERSION=8.3.6-0ubuntu0.24.04.3
+    PHP_VERSION=8.3.6-0ubuntu0.24.04.3 \
+    # renovate: datasource=repology depName=ubuntu_24_04/unzip
+    ZIP_VERSION=3.0-13ubuntu0.2 \
+    # renovate: datasource=repology depName=ubuntu_24_04/unzip
+    UNZIP_VERSION=6.0-28ubuntu4.1
 
 RUN apt-get update && \
   apt-get upgrade -y && \
@@ -62,7 +66,8 @@ RUN apt-get update && \
     php8.3-opcache="${PHP_VERSION}" \
     php8.3-xml="${PHP_VERSION}" \
     php8.3-zip="${PHP_VERSION}" \
-    zip
+    zip="${ZIP_VERSION}" \
+    unzip="${UNZIP_VERSION}"
 
 RUN curl -o actions-runner.tar.gz -L https://github.com/actions/runner/releases/download/v${RUNNER_VERSION}/actions-runner-${RUNNER_PLATFORM}-${RUNNER_VERSION}.tar.gz && \
   echo "$RUNNER_SHA  actions-runner.tar.gz" | sha256sum -c && \
