@@ -69,6 +69,7 @@ RUN apt-get update && \
     zip="${ZIP_VERSION}" \
     unzip="${UNZIP_VERSION}"
 
+# install kubectl
 RUN curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.32/deb/Release.key | gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg && \
     chmod 644 /etc/apt/keyrings/kubernetes-apt-keyring.gpg && \
     echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.32/deb/ /' | tee /etc/apt/sources.list.d/kubernetes.list && \
@@ -77,6 +78,7 @@ RUN curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.32/deb/Release.key | gpg --d
     apt-get install -y kubectl && \
     kubectl version --client
 
+# install GitHub actions runner
 RUN curl -o actions-runner.tar.gz -L https://github.com/actions/runner/releases/download/v${RUNNER_VERSION}/actions-runner-${RUNNER_PLATFORM}-${RUNNER_VERSION}.tar.gz && \
   echo "$RUNNER_SHA  actions-runner.tar.gz" | sha256sum -c && \
   tar xzf ./actions-runner.tar.gz && \
@@ -87,6 +89,7 @@ RUN curl -o actions-runner.tar.gz -L https://github.com/actions/runner/releases/
   usermod -aG docker runner && \
   rm -rf /var/lib/apt/lists/*
 
+# install composer
 # renovate: datasource=github-releases depName=custom-composer packageName=composer/composer
 ARG COMPOSER_VERSION=2.8.6
 ARG COMPOSER_FILE=composer.phar
