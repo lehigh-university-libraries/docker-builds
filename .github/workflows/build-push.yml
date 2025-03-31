@@ -8,7 +8,7 @@ jobs:
     outputs:
       folders: ${{ steps.jobs.outputs.folders }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
         with:
           fetch-depth: 0
       - id: jobs
@@ -28,7 +28,7 @@ jobs:
     outputs:
       tags: ${{ steps.tags.outputs.tags }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
       - id: tags
         run: |
           json_array=$(echo '${{ needs.find-jobs.outputs.folders }}' | jq -rc '.[]')
