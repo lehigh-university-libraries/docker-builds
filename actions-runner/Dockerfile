@@ -34,7 +34,7 @@ ARG \
     # renovate: datasource=repology depName=ubuntu_24_04/lsb-release-minimal
     LSB_VERSION=12.0-2 \
     # renovate: datasource=repology depName=ubuntu_24_04/php8.3
-    PHP_VERSION=8.3.6-0ubuntu0.24.04.3 \
+    PHP_VERSION=8.3.6-0ubuntu0.24.04.4 \
     # renovate: datasource=repology depName=ubuntu_24_04/unzip
     ZIP_VERSION=3.0-13ubuntu0.2 \
     # renovate: datasource=repology depName=ubuntu_24_04/unzip
