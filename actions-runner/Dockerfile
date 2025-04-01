@@ -1,7 +1,9 @@
 FROM ubuntu:24.04@sha256:72297848456d5d37d1262630108ab308d3e9ec7ed1c3286a32fe09856619a782
 
-ENV RUNNER_PLATFORM=linux-x64 \
+ARG \
+  # renovate: datasource=github-releases depName=gha-runner packageName=actions/runner
   RUNNER_VERSION=2.323.0 \
+  RUNNER_PLATFORM=linux-x64 \
   RUNNER_SHA=0dbc9bf5a58620fc52cb6cc0448abcca964a8d74b5f39773b7afcad9ab691e19
 
 WORKDIR /app
