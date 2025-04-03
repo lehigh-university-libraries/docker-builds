@@ -32,7 +32,7 @@ ARG \
     # renovate: datasource=repology depName=ubuntu_24_04/docker.io
     DOCKER_VERSION=26.1.3-0ubuntu1~24.04.1 \
     # renovate: datasource=repology depName=ubuntu_24_04/gnupg2
-    GNUPG_VERSION=2.4.4-2ubuntu17 \
+    GNUPG_VERSION=2.4.4-2ubuntu17.2 \
     # renovate: datasource=repology depName=ubuntu_24_04/lsb-release-minimal
     LSB_VERSION=12.0-2 \
     # renovate: datasource=repology depName=ubuntu_24_04/php8.3
