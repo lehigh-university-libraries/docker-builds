@@ -1,4 +1,4 @@
-FROM islandora/cantaloupe:3.5@sha256:f0d4a12be647459d35247b5e078b2b2feb62890193a7af52dcb044cc6260cb6e
+FROM islandora/cantaloupe:3.6@sha256:89bd0bc1a4e7ad72311c4b63f5858c5cfca4219da362b19faf20723b60bc0c71
 
 ARG \
     # renovate: datasource=repology depName=alpine_3_20/gcc
