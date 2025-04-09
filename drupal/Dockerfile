@@ -14,7 +14,9 @@ ARG \
     # renovate: datasource=repology depName=alpine_3_20/ffmpeg
     FFMPEG_VERSION=6.1.1-r8 \
     # renovate: datasource=repology depName=alpine_3_20/poppler-utils
-    POPPLER_VERSION=24.02.0-r2
+    POPPLER_VERSION=24.02.0-r2 \
+    # renovate: datasource=repology depName=alpine_3_20/rsync
+    RSYNC_VERSION=3.4.0-r0
 
 RUN --mount=type=bind,from=imagemagick,source=/packages,target=/packages \
     --mount=type=bind,from=imagemagick,source=/etc/apk/keys,target=/etc/apk/keys-imagemagick \
@@ -30,5 +32,6 @@ RUN --mount=type=bind,from=imagemagick,source=/packages,target=/packages \
       php83-pecl-memcache=="${PHP_MEMCACHE_VERSION}" \
       php83-pecl-xhprof=="${PHP_XHPROF_VERSION}" \
       ffmpeg=="${FFMPEG_VERSION}" \
-      poppler-utils=="${POPPLER_VERSION}" && \
+      poppler-utils=="${POPPLER_VERSION}" \
+      rsync=="${RSYNC_VERSION}" && \
     cleanup.sh
