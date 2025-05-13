@@ -96,7 +96,7 @@ RUN curl -o actions-runner.tar.gz -L https://github.com/actions/runner/releases/
 ARG COMPOSER_VERSION=2.8.9
 ARG COMPOSER_FILE=composer.phar
 ARG COMPOSER_URL=https://getcomposer.org/download/${COMPOSER_VERSION}/${COMPOSER_FILE}
-ARG COMPOSER_SHA256="2528507840901565fe6cecd19c7e9f8983b8d91b5eb4bab1599b14254401e675"
+ARG COMPOSER_SHA256="8e8829ec2b97fcb05158236984bc252bef902e7b8ff65555a1eeda4ec13fb82b"
 RUN curl -sLo "${COMPOSER_FILE}" "${COMPOSER_URL}" && \
     echo "${COMPOSER_SHA256}  ${COMPOSER_FILE}" | sha256sum -c && \
     mv "${COMPOSER_FILE}" /usr/bin/composer && \
