@@ -25,10 +25,25 @@
       automergeType: 'pr',
     },
     {
+      groupName: 'non-major-updates',
+      matchPackageNames: [
+        '*',
+      ],
+      matchUpdateTypes: [
+        'minor',
+        'patch',
+        'digest',
+      ],
+    },
+    {
       matchUpdateTypes: [
         'major',
       ],
-      enabled: false,
+      matchPackageNames: [
+        '*',
+      ],
+      groupName: null,
+      prConcurrentLimit: 1,
     },
   ],
   customManagers: [
