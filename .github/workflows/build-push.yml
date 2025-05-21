@@ -45,18 +45,17 @@ jobs:
           echo $TAGS | jq .
           echo "tags=$TAGS" >> $GITHUB_OUTPUT
 
-  build-push-ar:
-    name: "Build and push ${{ matrix.tags.image }} to Google Artifact Registry"
+  build-push-ghcr:
+    name: "docker build+push ${{ matrix.tags.image }} to ghcr.io"
     needs: [get-tags]
     strategy:
       matrix:
         tags: ${{ fromJson(needs.get-tags.outputs.tags) }}
-    uses: ./.github/workflows/build-push-ar.yml
+    uses: lehigh-university-libraries/gha/.github/workflows/build-push-ghcr.yaml@main
     with:
-      image: "internal/${{ matrix.tags.image }}"
+      image: ${{ github.repository }}/${{ matrix.tags.image }}
       context: ${{ matrix.tags.context }}
-      build-args: ${{ matrix.tags.args }}
     permissions:
       contents: read
-      id-token: write
+      packages: write
     secrets: inherit
