@@ -1,5 +1,5 @@
-FROM islandora/imagemagick:alpine-3.20.2-imagemagick-7.1.1.36-r0@sha256:a1fa03a18e7e232e380d070d196dc2c0e0a8762dd385640b932e28fcacfd9b05 as imagemagick
-FROM islandora/leptonica:alpine-3.20.2-leptonica-1.84.1-r0@sha256:9e9e46a328d8b55a61a352a6b06ff175f98e40cd5773c9bf93aac58fb56b65f7 as leptonica
+FROM islandora/imagemagick:4@sha256:57b6db1405c3e332e7e84134e1c9a8c57a61acf9b9e47d0091070cb16a44c11d AS imagemagick
+FROM islandora/leptonica:4@sha256:d8f5d1b5d9f20b551eaf834af954339b6797150394816e2427b5f1134d815ddf AS leptonica
 FROM islandora/drupal:4@sha256:93af2550df430c86a835fa87218e9bcb31f387afe0a1c384e44128c2490e1bf3
 
 ARG \

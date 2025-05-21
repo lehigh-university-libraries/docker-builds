@@ -103,6 +103,5 @@ RUN curl -sLo "${COMPOSER_FILE}" "${COMPOSER_URL}" && \
     chmod a+x /usr/bin/composer
 
 COPY docker-entrypoint.sh .
-COPY hadolint /usr/bin/
 
 ENTRYPOINT [ "/app/docker-entrypoint.sh" ]
