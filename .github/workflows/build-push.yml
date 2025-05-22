@@ -53,7 +53,7 @@ jobs:
         tags: ${{ fromJson(needs.get-tags.outputs.tags) }}
     uses: lehigh-university-libraries/gha/.github/workflows/build-push-ghcr.yaml@main
     with:
-      image: ${{ github.repository }}/${{ matrix.tags.image }}
+      image: docker-builds/${{ matrix.tags.image }}
       context: ${{ matrix.tags.context }}
     permissions:
       contents: read
