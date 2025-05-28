@@ -40,7 +40,19 @@ ARG \
     # renovate: datasource=repology depName=ubuntu_24_04/unzip
     ZIP_VERSION=3.0-13ubuntu0.2 \
     # renovate: datasource=repology depName=ubuntu_24_04/unzip
-    UNZIP_VERSION=6.0-28ubuntu4.1
+    UNZIP_VERSION=6.0-28ubuntu4.1 \
+    # renovate: datasource=repology depName=ubuntu_24_04/libmagic-dev
+    LIBMAGIC_VERSION=1:5.45-3build1 \
+    # renovate: datasource=repology depName=ubuntu_24_04/python3-pip
+    PYTHON_PIP_VERSION=24.0+dfsg-1ubuntu1.1 \
+    # renovate: datasource=repology depName=ubuntu_24_04/python3-setuptools
+    PYTHON_SETUPTOOLS_VERSION=68.1.2-2ubuntu1.1 \
+    # renovate: datasource=repology depName=ubuntu_24_04/python3-build
+    PYTHON_BUILD_VERSION=1.0.3-2 \
+    # renovate: datasource=repology depName=ubuntu_24_04/python3-urllib3
+    PYTHON_URLLIB3_VERSION=2.0.7-1ubuntu0.1 \
+    # renovate: datasource=repology depName=ubuntu_24_04/python3-magic
+    PYTHON_MAGIC_VERSION=2:0.4.27-3
 
 RUN apt-get update && \
   apt-get upgrade -y && \
@@ -57,6 +69,7 @@ RUN apt-get update && \
     docker-compose-v2=${DOCKER_COMPOSE_VERSION} \
     docker.io=${DOCKER_VERSION} \
     gnupg2=${GNUPG_VERSION} \
+    libmagic-dev="${LIBMAGIC_VERSION}" \
     lsb-release=${LSB_VERSION} \
     php8.3=${PHP_VERSION} \
     php8.3-curl="${PHP_VERSION}" \
@@ -68,6 +81,11 @@ RUN apt-get update && \
     php8.3-opcache="${PHP_VERSION}" \
     php8.3-xml="${PHP_VERSION}" \
     php8.3-zip="${PHP_VERSION}" \
+    python3-pip="${PYTHON_PIP_VERSION}" \
+    python3-setuptools="${PYTHON_SETUPTOOLS_VERSION}" \
+    python3-build="${PYTHON_BUILD_VERSION}" \
+    python3-urllib3="${PYTHON_URLLIB3_VERSION}" \
+    python3-magic="${PYTHON_MAGIC_VERSION}" \
     zip="${ZIP_VERSION}" \
     unzip="${UNZIP_VERSION}"
 
@@ -101,6 +119,18 @@ RUN curl -sLo "${COMPOSER_FILE}" "${COMPOSER_URL}" && \
     echo "${COMPOSER_SHA256}  ${COMPOSER_FILE}" | sha256sum -c && \
     mv "${COMPOSER_FILE}" /usr/bin/composer && \
     chmod a+x /usr/bin/composer
+
+# install islandora workbench python dependencies
+WORKDIR /workbench
+RUN curl -o workbench.zip -L https://github.com/lehigh-university-libraries/islandora_workbench/archive/refs/heads/simple-field-json.zip && \
+  echo "bb2725b42330f319df09d955b149023f08c00b88d623d8e50a817c6b5f493811  workbench.zip" | sha256sum -c && \
+  unzip -oj ./workbench.zip && \
+  rm ./workbench.zip && \
+  python3 -m build --no-isolation && \
+  python3 -m pip install --no-build-isolation --break-system-packages dist/*.whl && \
+  rm -rf /workbench
+
+WORKDIR /app
 
 COPY docker-entrypoint.sh .
 
