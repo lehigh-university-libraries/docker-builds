@@ -26,9 +26,9 @@ ARG \
     # renovate: datasource=repology depName=ubuntu_24_04/yq
     YQ_VERSION=3.1.0-3 \
     # renovate: datasource=repology depName=ubuntu_24_04/docker-buildx
-    DOCKER_BUILDX_VERSION=0.14.1-0ubuntu1~24.04.1 \
+    DOCKER_BUILDX_VERSION=0.20.1-0ubuntu1~24.04.1 \
     # renovate: datasource=repology depName=ubuntu_24_04/docker-compose-v2
-    DOCKER_COMPOSE_VERSION=2.27.1+ds1-0ubuntu1~24.04.1 \
+    DOCKER_COMPOSE_VERSION=2.33.0+ds1-0ubuntu1~24.04.1 \
     # renovate: datasource=repology depName=ubuntu_24_04/docker.io
     DOCKER_VERSION=26.1.3-0ubuntu1~24.04.1 \
     # renovate: datasource=repology depName=ubuntu_24_04/gnupg2
