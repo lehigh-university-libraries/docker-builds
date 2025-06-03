@@ -1,8 +1,8 @@
-FROM ubuntu:24.04@sha256:6015f66923d7afbc53558d7ccffd325d43b4e249f41a6e93eef074c9505d2233
+FROM ubuntu:24.04@sha256:b59d21599a2b151e23eea5f6602f4af4d7d31c4e236d22bf0b62b86d2e386b8f
 
 ARG \
   # renovate: datasource=github-releases depName=gha-runner packageName=actions/runner
-  RUNNER_VERSION=2.324.0 \
+  RUNNER_VERSION=2.325.0 \
   RUNNER_PLATFORM=linux-x64 \
   RUNNER_SHA=e8e24a3477da17040b4d6fa6d34c6ecb9a2879e800aa532518ec21e49e21d7b4
 
@@ -26,9 +26,9 @@ ARG \
     # renovate: datasource=repology depName=ubuntu_24_04/yq
     YQ_VERSION=3.1.0-3 \
     # renovate: datasource=repology depName=ubuntu_24_04/docker-buildx
-    DOCKER_BUILDX_VERSION=0.14.1-0ubuntu1~24.04.1 \
+    DOCKER_BUILDX_VERSION=0.20.1-0ubuntu1~24.04.1 \
     # renovate: datasource=repology depName=ubuntu_24_04/docker-compose-v2
-    DOCKER_COMPOSE_VERSION=2.27.1+ds1-0ubuntu1~24.04.1 \
+    DOCKER_COMPOSE_VERSION=2.33.0+ds1-0ubuntu1~24.04.1 \
     # renovate: datasource=repology depName=ubuntu_24_04/docker.io
     DOCKER_VERSION=26.1.3-0ubuntu1~24.04.1 \
     # renovate: datasource=repology depName=ubuntu_24_04/gnupg2
