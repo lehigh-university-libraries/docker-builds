@@ -141,5 +141,6 @@ RUN mkdir -p -m 755 /etc/apt/keyrings \
 WORKDIR /app
 
 COPY docker-entrypoint.sh .
+COPY isle.pem /etc/ssl/certs/isle.pem
 
 ENTRYPOINT [ "/app/docker-entrypoint.sh" ]
