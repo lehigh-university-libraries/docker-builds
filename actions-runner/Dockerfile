@@ -130,6 +130,14 @@ RUN curl -o workbench.zip -L https://github.com/lehigh-university-libraries/isla
   python3 -m pip install --no-build-isolation --break-system-packages dist/*.whl && \
   rm -rf /workbench
 
+RUN mkdir -p -m 755 /etc/apt/keyrings \
+        && out=$(mktemp) && curl -L -o $out https://cli.github.com/packages/githubcli-archive-keyring.gpg \
+        && cat $out | tee /etc/apt/keyrings/githubcli-archive-keyring.gpg > /dev/null \
+	&& chmod go+r /etc/apt/keyrings/githubcli-archive-keyring.gpg \
+	&& echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | tee /etc/apt/sources.list.d/github-cli.list > /dev/null \
+	&& apt update \
+	&& apt install gh -y
+
 WORKDIR /app
 
 COPY docker-entrypoint.sh .
