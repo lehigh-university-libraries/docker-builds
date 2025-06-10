@@ -10,84 +10,40 @@ WORKDIR /app
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
-ARG \
-    # renovate: datasource=repology depName=ubuntu_24_04/ca-certificates
-    CA_CERTIFICATES_VERSION=20240203 \
-    # renovate: datasource=repology depName=ubuntu_24_04/curl
-    CURL_VERSION=8.5.0-2ubuntu10.6 \
-    # renovate: datasource=repology depName=ubuntu_24_04/git
-    GIT_VERSION=1:2.43.0-1ubuntu7.2 \
-    # renovate: datasource=repology depName=ubuntu_24_04/jq
-    JQ_VERSION=1.7.1-3build1 \
-    # renovate: datasource=repology depName=ubuntu_24_04/make
-    MAKE_VERSION=4.3-4.1build2 \
-    # renovate: datasource=repology depName=ubuntu_24_04/sudo
-    SUDO_VERSION=1.9.15p5-3ubuntu5 \
-    # renovate: datasource=repology depName=ubuntu_24_04/yq
-    YQ_VERSION=3.1.0-3 \
-    # renovate: datasource=repology depName=ubuntu_24_04/docker-buildx
-    DOCKER_BUILDX_VERSION=0.20.1-0ubuntu1~24.04.1 \
-    # renovate: datasource=repology depName=ubuntu_24_04/docker-compose-v2
-    DOCKER_COMPOSE_VERSION=2.33.0+ds1-0ubuntu1~24.04.1 \
-    # renovate: datasource=repology depName=ubuntu_24_04/docker.io
-    DOCKER_VERSION=26.1.3-0ubuntu1~24.04.1 \
-    # renovate: datasource=repology depName=ubuntu_24_04/gnupg2
-    GNUPG_VERSION=2.4.4-2ubuntu17.2 \
-    # renovate: datasource=repology depName=ubuntu_24_04/lsb-release-minimal
-    LSB_VERSION=12.0-2 \
-    # renovate: datasource=repology depName=ubuntu_24_04/php8.3
-    PHP_VERSION=8.3.6-0ubuntu0.24.04.4 \
-    # renovate: datasource=repology depName=ubuntu_24_04/unzip
-    ZIP_VERSION=3.0-13ubuntu0.2 \
-    # renovate: datasource=repology depName=ubuntu_24_04/unzip
-    UNZIP_VERSION=6.0-28ubuntu4.1 \
-    # renovate: datasource=repology depName=ubuntu_24_04/libmagic-dev
-    LIBMAGIC_VERSION=1:5.45-3build1 \
-    # renovate: datasource=repology depName=ubuntu_24_04/python3-pip
-    PYTHON_PIP_VERSION=24.0+dfsg-1ubuntu1.1 \
-    # renovate: datasource=repology depName=ubuntu_24_04/python3-setuptools
-    PYTHON_SETUPTOOLS_VERSION=68.1.2-2ubuntu1.1 \
-    # renovate: datasource=repology depName=ubuntu_24_04/python3-build
-    PYTHON_BUILD_VERSION=1.0.3-2 \
-    # renovate: datasource=repology depName=ubuntu_24_04/python3-urllib3
-    PYTHON_URLLIB3_VERSION=2.0.7-1ubuntu0.1 \
-    # renovate: datasource=repology depName=ubuntu_24_04/python3-magic
-    PYTHON_MAGIC_VERSION=2:0.4.27-3
-
 RUN apt-get update && \
   apt-get upgrade -y && \
   apt-get install -y --no-install-recommends \
-    ca-certificates=${CA_CERTIFICATES_VERSION} \
-    curl=${CURL_VERSION} \
-    git=${GIT_VERSION} \
-    jq=${JQ_VERSION} \
-    make=${MAKE_VERSION} \
-    sudo=${SUDO_VERSION} \
-    yq=${YQ_VERSION} \
+    ca-certificates \
+    curl \
+    git \
+    jq \
+    make \
+    sudo \
+    yq \
     libicu-dev \
-    docker-buildx=${DOCKER_BUILDX_VERSION} \
-    docker-compose-v2=${DOCKER_COMPOSE_VERSION} \
-    docker.io=${DOCKER_VERSION} \
-    gnupg2=${GNUPG_VERSION} \
-    libmagic-dev="${LIBMAGIC_VERSION}" \
-    lsb-release=${LSB_VERSION} \
-    php8.3=${PHP_VERSION} \
-    php8.3-curl="${PHP_VERSION}" \
-    php8.3-fpm="${PHP_VERSION}" \
-    php8.3-gd="${PHP_VERSION}" \
-    php8.3-intl="${PHP_VERSION}" \
-    php8.3-mbstring="${PHP_VERSION}" \
-    php8.3-mysql="${PHP_VERSION}" \
-    php8.3-opcache="${PHP_VERSION}" \
-    php8.3-xml="${PHP_VERSION}" \
-    php8.3-zip="${PHP_VERSION}" \
-    python3-pip="${PYTHON_PIP_VERSION}" \
-    python3-setuptools="${PYTHON_SETUPTOOLS_VERSION}" \
-    python3-build="${PYTHON_BUILD_VERSION}" \
-    python3-urllib3="${PYTHON_URLLIB3_VERSION}" \
-    python3-magic="${PYTHON_MAGIC_VERSION}" \
-    zip="${ZIP_VERSION}" \
-    unzip="${UNZIP_VERSION}"
+    docker-buildx \
+    docker-compose-v2 \
+    docker.io \
+    gnupg2 \
+    libmagic-dev \
+    lsb-release \
+    php8.3 \
+    php8.3-curl \
+    php8.3-fpm \
+    php8.3-gd \
+    php8.3-intl \
+    php8.3-mbstring \
+    php8.3-mysql \
+    php8.3-opcache \
+    php8.3-xml \
+    php8.3-zip \
+    python3-pip \
+    python3-setuptools \
+    python3-build \
+    python3-urllib3 \
+    python3-magic \
+    zip \
+    unzip
 
 # install kubectl
 RUN curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.32/deb/Release.key | gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg && \
