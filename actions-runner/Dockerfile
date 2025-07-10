@@ -4,7 +4,7 @@ ARG \
   # renovate: datasource=github-releases depName=gha-runner packageName=actions/runner
   RUNNER_VERSION=2.326.0 \
   RUNNER_PLATFORM=linux-x64 \
-  RUNNER_SHA=5020da7139d85c776059f351e0de8fdec753affc9c558e892472d43ebeb518f4
+  RUNNER_SHA=9c74af9b4352bbc99aecc7353b47bcdfcd1b2a0f6d15af54a99f54a0c14a1de8
 
 WORKDIR /app
 
