@@ -1,8 +1,8 @@
-FROM ubuntu:24.04@sha256:b59d21599a2b151e23eea5f6602f4af4d7d31c4e236d22bf0b62b86d2e386b8f
+FROM ubuntu:24.04@sha256:440dcf6a5640b2ae5c77724e68787a906afb8ddee98bf86db94eea8528c2c076
 
 ARG \
   # renovate: datasource=github-releases depName=gha-runner packageName=actions/runner
-  RUNNER_VERSION=2.325.0 \
+  RUNNER_VERSION=2.326.0 \
   RUNNER_PLATFORM=linux-x64 \
   RUNNER_SHA=5020da7139d85c776059f351e0de8fdec753affc9c558e892472d43ebeb518f4
 
