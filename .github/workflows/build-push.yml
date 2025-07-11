@@ -1,6 +1,7 @@
 name: build-push
 on:
   push:
+  workflow_dispatch:
 jobs:
   find-jobs:
     name: Find changed directories
@@ -54,8 +55,9 @@ jobs:
         tags: ${{ fromJson(needs.get-tags.outputs.tags) }}
     uses: lehigh-university-libraries/gha/.github/workflows/build-push-ghcr.yaml@main
     with:
-      image: docker-builds/${{ matrix.tags.image }}
+      image: ${{ matrix.tags.image }}
       context: ${{ matrix.tags.context }}
+      runners: ${{ matrix.tags.image == 'scyllaridae-whisper' && '["ubuntu-24.04"]' || '["ubuntu-24.04", "ubuntu-24.04-arm"]' }}
     permissions:
       contents: read
       packages: write
