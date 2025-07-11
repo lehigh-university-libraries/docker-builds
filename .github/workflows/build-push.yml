@@ -1,6 +1,7 @@
 name: build-push
 on:
   push:
+  workflow_dispatch:
 jobs:
   find-jobs:
     name: Find changed directories
@@ -16,8 +17,11 @@ jobs:
         run: |
           set -eou pipefail
           base="origin/main"
-          if git cat-file -e "${{ github.event.before }}^{commit}"; then
+          if git cat-file -e "${{ github.event.before }}^{commit}" || false; then
             base="${{ github.event.before }}"
+          else
+            echo "folders=$(ls -d  */| awk -F '/' '{print $1}'|sort| jq -c --raw-input --slurp 'split("\n") | .[0:-1]')"  >> $GITHUB_OUTPUT
+            exit 0
           fi
           folders=$(git diff --diff-filter="ACMR" --name-only "$base" ${{ github.event.after }} | xargs dirname | awk -F '/' '{print $1}' | sort | uniq | grep -Ev "^\." | awk NF | jq -c --raw-input --slurp 'split("\n") | .[0:-1]')
           echo $folders | jq .
@@ -54,8 +58,9 @@ jobs:
         tags: ${{ fromJson(needs.get-tags.outputs.tags) }}
     uses: lehigh-university-libraries/gha/.github/workflows/build-push-ghcr.yaml@main
     with:
-      image: docker-builds/${{ matrix.tags.image }}
+      image: ${{ matrix.tags.image }}
       context: ${{ matrix.tags.context }}
+      runners: ${{ matrix.tags.image == 'scyllaridae-whisper' && '["ubuntu-24.04"]' || '["ubuntu-24.04", "ubuntu-24.04-arm"]' }}
     permissions:
       contents: read
       packages: write

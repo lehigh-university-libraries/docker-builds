@@ -1,0 +1,16 @@
+allowedMimeTypes:
+  - "application/pdf"
+  - "image/*"
+cmdByMimeType:
+  "application/pdf":
+    cmd: pdftotext
+    args:
+      - "%args"
+      - "-"
+      - "-"
+  default:
+    cmd: tesseract
+    args:
+      - "stdin"
+      - "stdout"
+      - "%args"

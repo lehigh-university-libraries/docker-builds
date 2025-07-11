@@ -3,5 +3,5 @@
 Used in https://github.com/lehigh-university-libraries/isle-preserve
 
 ```
-Rebuild count: 0
+Rebuild count: 1
 ```
