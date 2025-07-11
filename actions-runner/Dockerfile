@@ -67,10 +67,10 @@ RUN curl -o actions-runner.tar.gz -L https://github.com/actions/runner/releases/
 
 # install composer
 # renovate: datasource=github-releases depName=custom-composer packageName=composer/composer
-ARG COMPOSER_VERSION=2.8.9
+ARG COMPOSER_VERSION=2.8.10
 ARG COMPOSER_FILE=composer.phar
 ARG COMPOSER_URL=https://getcomposer.org/download/${COMPOSER_VERSION}/${COMPOSER_FILE}
-ARG COMPOSER_SHA256="8e8829ec2b97fcb05158236984bc252bef902e7b8ff65555a1eeda4ec13fb82b"
+ARG COMPOSER_SHA256="28dbb6bd8bef31479c7985b774c130a8bda37dbe63c35b56f6cb6bc377427573"
 RUN curl -sLo "${COMPOSER_FILE}" "${COMPOSER_URL}" && \
     echo "${COMPOSER_SHA256}  ${COMPOSER_FILE}" | sha256sum -c && \
     mv "${COMPOSER_FILE}" /usr/bin/composer && \
