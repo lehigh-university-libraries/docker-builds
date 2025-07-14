@@ -1,4 +1,4 @@
-FROM islandora/imagemagick:main@sha256:16f4a7e4a380e91a2a85040f53a483a080f3b1ff0066b4a01b199455ae16f0cc AS imagemagick
+FROM islandora/imagemagick:main@sha256:75938957ddc19998dec5022876cf258dc14d02fae337cb25a46a174b5cb0188f AS imagemagick
 FROM ghcr.io/lehigh-university-libraries/scyllaridae:main@sha256:a9f8d04a3695f0de44fbb0c5c63aac3235bcbf23b6fb6d3f5ecd1f7915aae92f
 
 SHELL ["/bin/ash", "-o", "pipefail", "-c"]

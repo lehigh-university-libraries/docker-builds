@@ -1,5 +1,5 @@
 FROM ghcr.io/lehigh-university-libraries/scyllaridae:main@sha256:a9f8d04a3695f0de44fbb0c5c63aac3235bcbf23b6fb6d3f5ecd1f7915aae92f AS scyllaridae
-FROM pandoc/latex:3.7-ubuntu@sha256:0641e4142b609a732d1b2d4ffd71e716152c25a902d9dd3ede33e90d7b2c880c AS pandoc
+FROM pandoc/latex:3.7-ubuntu@sha256:d3b2b68d5b26d9cc7e7d727afc9120b0d661100c954df0a1d02ab9b4c7710cbf AS pandoc
 
 ARG \
   # renovate: datasource=repology depName=ubuntu_24_04/gosu
