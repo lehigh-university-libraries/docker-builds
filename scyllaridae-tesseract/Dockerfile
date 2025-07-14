@@ -1,4 +1,4 @@
-FROM islandora/leptonica:main@sha256:9f8a5bba06d8639fd34671696cdd4af01dfcba1e35d2aa1b621a9ca684db7e93 AS leptonica
+FROM islandora/leptonica:main@sha256:a028717811d99ad90d3e2b222d4dd5e41c3a014006453b2137f41253798e0d56 AS leptonica
 FROM ghcr.io/lehigh-university-libraries/scyllaridae:main@sha256:a9f8d04a3695f0de44fbb0c5c63aac3235bcbf23b6fb6d3f5ecd1f7915aae92f
 
 ARG \
