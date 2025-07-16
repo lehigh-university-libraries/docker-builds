@@ -25,9 +25,9 @@ If you have [drupal/islandora_jwks](https://www.drupal.org/project/islandora_jwk
 
 This config requires a JWT signed by your Islandora site in order to generate a FITS derivative.
 
-## Config (insecure)
+## Config (less secure)
 
-If you do not have [drupal/islandora_jwks](https://www.drupal.org/project/islandora_jwks) installed on your Islandora Drupal site, you can avoid JWT verificaiton with the following docker compose config
+If you do not have [drupal/islandora_jwks](https://www.drupal.org/project/islandora_jwks) installed on your Islandora Drupal site, you can avoid JWT verification with the following docker compose config
 
 ```yaml
     crayfits-dev: &crayfits
