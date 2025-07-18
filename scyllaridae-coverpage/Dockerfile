@@ -1,4 +1,4 @@
-FROM ghcr.io/lehigh-university-libraries/scyllaridae:main@sha256:a9f8d04a3695f0de44fbb0c5c63aac3235bcbf23b6fb6d3f5ecd1f7915aae92f AS scyllaridae
+FROM ghcr.io/lehigh-university-libraries/scyllaridae:main@sha256:e962c522e49dd48afc11792b89505895ab29a37044ea95591881e299f856c27e AS scyllaridae
 FROM pandoc/latex:3.7-ubuntu@sha256:d3b2b68d5b26d9cc7e7d727afc9120b0d661100c954df0a1d02ab9b4c7710cbf AS pandoc
 
 ARG \
