@@ -1,5 +1,4 @@
-FROM ghcr.io/lehigh-university-libraries/scyllaridae-imagemagick:main@sha256:a9af6f56878cbc1c283cce1d54a6c2f9cb471dfcfa99425c54593fc9a12e042a
-
+FROM ghcr.io/lehigh-university-libraries/scyllaridae:main@sha256:e962c522e49dd48afc11792b89505895ab29a37044ea95591881e299f856c27e
 
 RUN apk update && \
   apk add --no-cache \
