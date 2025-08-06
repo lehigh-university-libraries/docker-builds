@@ -1,5 +1,5 @@
-FROM islandora/imagemagick:main@sha256:75938957ddc19998dec5022876cf258dc14d02fae337cb25a46a174b5cb0188f AS imagemagick
-FROM islandora/leptonica:main@sha256:a028717811d99ad90d3e2b222d4dd5e41c3a014006453b2137f41253798e0d56 AS leptonica
+FROM islandora/imagemagick:main@sha256:affff3e53e37eb642df63fb1d4fee4be4551f908a246ddb41355229eb52b0af4 AS imagemagick
+FROM islandora/leptonica:main@sha256:b2b6e73cc167059b062c53b381f08b919f12a9b822bc8b78ebda241f12e7e26d AS leptonica
 FROM ghcr.io/lehigh-university-libraries/scyllaridae:main@sha256:e962c522e49dd48afc11792b89505895ab29a37044ea95591881e299f856c27e
 
 ARG \
