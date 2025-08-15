@@ -40,6 +40,18 @@ if [ "$DESTINATION_EXT" = "mp4" ]; then
   )
   echo "${cmd[@]}" >&2
   "${cmd[@]}" > /dev/null
+elif [ "$DESTINATION_EXT" = "jpg" ] || [ "$DESTINATION_EXT" = "png" ] ; then
+  cmd=(
+    ffmpeg -loglevel error
+    -f "$SOURCE_EXT"
+    -i "$INPUT_FILE"
+    "${ARGS[@]}"
+    -f image2pipe
+    -vcodec "${DESTINATION_EXT/#jpg/mjpeg}"
+    "$OUTPUT_FILE"
+  )
+  echo "${cmd[@]}" >&2
+  "${cmd[@]}" > /dev/null
 else
   cmd=(
     ffmpeg -loglevel error
