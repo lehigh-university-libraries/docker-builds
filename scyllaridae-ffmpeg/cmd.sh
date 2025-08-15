@@ -46,6 +46,14 @@ elif [ "$DESTINATION_EXT" = "jpg" ] || [ "$DESTINATION_EXT" = "png" ] ; then
     ffmpeg -loglevel error
     -f "$SOURCE_EXT"
     -i "$INPUT_FILE"
+  )
+
+  # Add audio visualization for image output from audio input
+  if [[ "$SOURCE_EXT" =~ ^(mp3|wav|flac|aac|ogg|m4a)$ ]]; then
+    cmd+=(-filter_complex "showwavespic=colors=#FFC627" -frames:v 1)
+  fi
+
+  cmd+=(
     "${ARGS[@]}"
     -f image2pipe
     -vcodec "${DESTINATION_EXT/#jpg/mjpeg}"
