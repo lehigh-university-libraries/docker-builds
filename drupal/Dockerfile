@@ -1,6 +1,6 @@
-FROM islandora/imagemagick:4@sha256:534884b74f11e3931d0a7fe682dcc4ae76ca56a5d9c79bbb7757e2fbeff132ea AS imagemagick
-FROM islandora/leptonica:4@sha256:c804dd4f8960c9dbf7020155b46086914ce0bfc2b1db7e697bf165d9954913dd AS leptonica
-FROM islandora/drupal:4@sha256:9aa681f14fe0412320cb2059f0fb958c3da339314a5328136636a8f5e626e268
+FROM islandora/imagemagick:4@sha256:e6d1c25ae2ca5cf022c333e72f467731493c441fcb59e827ebb179003674f9b2 AS imagemagick
+FROM islandora/leptonica:4@sha256:b15a592644d134ab5ccda6e33a5557bd25f4eff03ddb5fc5d56484b6c8944b9e AS leptonica
+FROM islandora/drupal:4@sha256:de68b22c4801e798e53564b390dbda372f09674587b01492bed380d44937ae5c
 
 ARG \
     # renovate: datasource=repology depName=alpine_3_20/php83-pdo_sqlite
