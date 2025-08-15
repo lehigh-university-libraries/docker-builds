@@ -5,9 +5,10 @@ set -eou pipefail
 SOURCE_EXT="$1"
 DESTINATION_EXT="$2"
 ARGS=()
-if [ "$#" -eq 3 ]; then
-  IFS=' ' read -r -a ARGS <<< "$3"
+if [ "$#" -gt 2 ]; then
+  ARGS=("${@:3}")
 fi
+
 
 TMP_DIR=$(mktemp -d)
 INPUT_FILE="$TMP_DIR/input.$SOURCE_EXT"
