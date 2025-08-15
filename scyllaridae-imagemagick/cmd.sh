@@ -4,8 +4,8 @@ set -eou pipefail
 SOURCE_EXT="$1"
 DEST_EXT="$2"
 ARGS=()
-if [ "$#" -eq 3 ]; then
-  IFS=' ' read -r -a ARGS <<< "$3"
+if [ "$#" -gt 2 ]; then
+  ARGS=("${@:3}")
 fi
 
 OUTPUT=$(mktemp -u /tmp/output-XXXXXX)
