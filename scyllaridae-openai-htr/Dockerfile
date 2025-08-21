@@ -1,4 +1,4 @@
-FROM islandora/imagemagick:main@sha256:75938957ddc19998dec5022876cf258dc14d02fae337cb25a46a174b5cb0188f AS imagemagick
+FROM islandora/imagemagick:main@sha256:6d3f42ff7092d9a3d8084f260270766adf715576eb3a15a83f70c51bac232f95 AS imagemagick
 FROM ghcr.io/lehigh-university-libraries/scyllaridae:main@sha256:e962c522e49dd48afc11792b89505895ab29a37044ea95591881e299f856c27e
 
 ARG \
