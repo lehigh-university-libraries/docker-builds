@@ -1,4 +1,4 @@
-FROM ubuntu:24.04@sha256:a08e551cb33850e4740772b38217fc1796a66da2506d312abe51acda354ff061
+FROM ubuntu:24.04@sha256:7c06e91f61fa88c08cc74f7e1b7c69ae24910d745357e0dfe1d2c0322aaf20f9
 
 ARG \
   # renovate: datasource=github-releases depName=gha-runner packageName=actions/runner
@@ -67,7 +67,7 @@ RUN curl -o actions-runner.tar.gz -L https://github.com/actions/runner/releases/
 
 # install composer
 # renovate: datasource=github-releases depName=custom-composer packageName=composer/composer
-ARG COMPOSER_VERSION=2.8.10
+ARG COMPOSER_VERSION=2.8.11
 ARG COMPOSER_FILE=composer.phar
 ARG COMPOSER_URL=https://getcomposer.org/download/${COMPOSER_VERSION}/${COMPOSER_FILE}
 ARG COMPOSER_SHA256="28dbb6bd8bef31479c7985b774c130a8bda37dbe63c35b56f6cb6bc377427573"
