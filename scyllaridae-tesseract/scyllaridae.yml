@@ -9,8 +9,7 @@ cmdByMimeType:
       - "-"
       - "-"
   default:
-    cmd: tesseract
+    cmd: /app/cmd.sh
     args:
-      - "stdin"
-      - "stdout"
+      - "%source-mime-ext"
       - "%args"
