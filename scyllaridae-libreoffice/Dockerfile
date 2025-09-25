@@ -6,7 +6,7 @@ ARG \
   # renovate: datasource=repology depName=alpine_3_22/libreoffice
   LIBREOFFICE_VERSION=25.2.5.2-r0 \
   # renovate: datasource=repology depName=alpine_3_22/font-dejavu
-  TTF_DEJAVU_VERSION=2.37-r5
+  TTF_DEJAVU_VERSION=2.37-r6
 
 RUN apk update && \
   apk add --no-cache \
