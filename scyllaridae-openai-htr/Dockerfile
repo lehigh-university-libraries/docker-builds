@@ -1,9 +1,9 @@
-FROM islandora/imagemagick:main@sha256:f0f744eb27a9a6b11bd315a81389d0925cc0850a48089104e09d43ebcc0b29df AS imagemagick
-FROM ghcr.io/lehigh-university-libraries/scyllaridae:main@sha256:e962c522e49dd48afc11792b89505895ab29a37044ea95591881e299f856c27e
+FROM islandora/imagemagick:main@sha256:57bce2c46d2964ab70d9052c96519bd066b02896025ffdce34258c779ce2b8c2 AS imagemagick
+FROM ghcr.io/lehigh-university-libraries/scyllaridae:main@sha256:17b3ea02586a752473d42920b9098b9e8e395fde37b498d41e904e29c4e51353
 
 ARG \
-  # renovate: datasource=repology depName=alpine_3_20/jq
-  JQ_VERSION="1.7.1-r0"
+  # renovate: datasource=repology depName=alpine_3_22/jq
+  JQ_VERSION=1.8.0-r0
 
 SHELL ["/bin/ash", "-o", "pipefail", "-c"]
 
