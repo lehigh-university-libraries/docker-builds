@@ -1,10 +1,10 @@
-FROM ghcr.io/lehigh-university-libraries/scyllaridae:main@sha256:e962c522e49dd48afc11792b89505895ab29a37044ea95591881e299f856c27e
+FROM ghcr.io/lehigh-university-libraries/scyllaridae:main@sha256:17b3ea02586a752473d42920b9098b9e8e395fde37b498d41e904e29c4e51353
 
 ARG \
-  # renovate: datasource=repology depName=alpine_3_20/ffmpeg
-  FFMPEG_VERSION="6.1.1-r8" \
-  # renovate: datasource=repology depName=alpine_3_20/jq
-  JQ_VERSION="1.7.1-r0"
+  # renovate: datasource=repology depName=alpine_3_22/ffmpeg
+  FFMPEG_VERSION=6.1.2-r2 \
+  # renovate: datasource=repology depName=alpine_3_22/jq
+  JQ_VERSION=1.8.0-r0
 
 RUN apk update && \
     apk add --no-cache \
