@@ -29,7 +29,7 @@ else
     -ar 16000 -ac 2 "$output_file" > /dev/null 2>&1
 fi
 
-if [ -n "$CUDA_VISIBLE_DEVICES" ]; then
+if [ -n "${CUDA_VISIBLE_DEVICES:-}" ]; then
   best_gpu=$(nvidia-smi --query-gpu=memory.free --format=csv,noheader,nounits | \
     awk '{print $1}' | nl -v 0 | sort -k2 -nr | head -n"$WHISPER_PROCESSORS" | awk '{print $1}' | tr '\n' ',' | sed 's/,$/\n/')
   export CUDA_VISIBLE_DEVICES=$best_gpu
