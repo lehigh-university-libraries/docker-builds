@@ -1,4 +1,4 @@
-FROM islandora/scyllaridae:6@sha256:d8253051949967ac316392853986e69bcba791bf06d24f854716910a4a69de98 AS scyllaridae
+FROM islandora/scyllaridae:6@sha256:7ce43871a331d60fcbd89201f86c4d27d3f8ad8de7d37dcb3d70a103e063cb73 AS scyllaridae
 FROM ghcr.io/ggerganov/whisper.cpp:main-cuda@sha256:2eb507108c363c29399f564929e293509c01c98ba516173ab5b769ce6aafdabb
 
 ARG \

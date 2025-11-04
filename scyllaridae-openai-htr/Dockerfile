@@ -1,5 +1,5 @@
-FROM islandora/imagemagick:main@sha256:57bce2c46d2964ab70d9052c96519bd066b02896025ffdce34258c779ce2b8c2 AS imagemagick
-FROM islandora/scyllaridae:6@sha256:d8253051949967ac316392853986e69bcba791bf06d24f854716910a4a69de98
+FROM islandora/imagemagick:main@sha256:8f0127e8c72998a3ec1798c044c51d4f12958b9282402727e227c7176056d869 AS imagemagick
+FROM islandora/scyllaridae:6@sha256:7ce43871a331d60fcbd89201f86c4d27d3f8ad8de7d37dcb3d70a103e063cb73
 
 ARG \
   # renovate: datasource=repology depName=alpine_3_22/jq
