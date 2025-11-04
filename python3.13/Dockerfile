@@ -20,7 +20,7 @@ RUN create-service-user.sh --name pyapp && \
 ENV PIP_BREAK_SYSTEM_PACKAGES=1 \
     FLASK_APP="application.app:app" \
     WORKERS=4 \
-    SCRIPT_NAME=/
+    SCRIPT_NAME=
 
 RUN pip install uv && uv --version
 
