@@ -1,4 +1,4 @@
-FROM debian:trixie-slim@sha256:1caf1c703c8f7e15dcf2e7769b35000c764e6f50e4d7401c355fb0248f3ddfdb
+FROM trixie
 
 LABEL License="MIT License"
 
@@ -29,9 +29,9 @@ ENV \
     DB_ROOT_USER=root \
     DB_USER=default \
     DEVELOPMENT_ENVIRONMENT=false \
-    JWT_ADMIN_TOKEN=islandora \
     UID= \
-    DOWNLOAD_CACHE_DIRECTORY=/opt/downloads
+    DOWNLOAD_CACHE_DIRECTORY=/opt/downloads \
+    TZ=UTC
 
 ARG \
   TARGETARCH=amd64 \
