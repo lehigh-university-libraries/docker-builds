@@ -4,7 +4,7 @@ ARG \
   # renovate: datasource=github-releases depName=gha-runner packageName=actions/runner
   RUNNER_VERSION=2.329.0 \
   RUNNER_PLATFORM=linux-x64 \
-  RUNNER_SHA=9c74af9b4352bbc99aecc7353b47bcdfcd1b2a0f6d15af54a99f54a0c14a1de8
+  RUNNER_SHA=194f1e1e4bd02f80b7e9633fc546084d8d4e19f3928a324d512ea53430102e1d
 
 WORKDIR /app
 
@@ -70,7 +70,7 @@ RUN curl -o actions-runner.tar.gz -L https://github.com/actions/runner/releases/
 ARG COMPOSER_VERSION=2.8.12
 ARG COMPOSER_FILE=composer.phar
 ARG COMPOSER_URL=https://getcomposer.org/download/${COMPOSER_VERSION}/${COMPOSER_FILE}
-ARG COMPOSER_SHA256="257a969e9a9d27e0e45cfe954835c17a76033ba84a388e0f472db83eded65a8b"
+ARG COMPOSER_SHA256="f446ea719708bb85fcbf4ef18def5d0515f1f9b4d703f6d820c9c1656e10a2f2"
 RUN curl -sLo "${COMPOSER_FILE}" "${COMPOSER_URL}" && \
     echo "${COMPOSER_SHA256}  ${COMPOSER_FILE}" | sha256sum -c && \
     mv "${COMPOSER_FILE}" /usr/bin/composer && \
