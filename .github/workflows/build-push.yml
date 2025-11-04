@@ -2,65 +2,122 @@ name: build-push
 on:
   push:
   workflow_dispatch:
+
 jobs:
-  find-jobs:
-    name: Find changed directories
+  detect-changes:
     runs-on: ubuntu-24.04
     outputs:
-      folders: ${{ steps.jobs.outputs.folders }}
+      base-matrix: ${{ steps.filter.outputs.base-matrix }}
+      base-deps-matrix: ${{ steps.filter.outputs.base-deps-matrix }}
+      whisper-changed: ${{ steps.filter.outputs.whisper-changed }}
     steps:
-      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - id: jobs
-        shell: bash
+
+      - id: filter
+        name: Filter changed directories
         run: |
-          set -eou pipefail
-          base="origin/main"
-          if git cat-file -e "${{ github.event.before }}^{commit}" || false; then
-            base="${{ github.event.before }}"
-          else
-            echo "folders=$(ls -d  */| awk -F '/' '{print $1}'|sort| jq -c --raw-input --slurp 'split("\n") | .[0:-1]')"  >> $GITHUB_OUTPUT
+          set -euo pipefail
+
+          ALL_DIRS=$(ls -d */ 2>/dev/null | sed 's/\///' | grep -v '^\.' | jq -R -s -c 'split("\n") | map(select(length > 0))')
+
+          # Define special cases
+          BASE_DEPS_DIRS='["go"]'
+          WHISPER_DIR="scyllaridae-whisper"
+
+          # Calculate BASE_DIRS by filtering out BASE_DEPS and whisper
+          BASE_DIRS=$(echo "$ALL_DIRS" | jq -c --argjson deps "$BASE_DEPS_DIRS" --arg whisper "$WHISPER_DIR" '[.[] | select(. != $whisper and ([.] | inside($deps) | not))]')
+
+          # For workflow_dispatch, build everything
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "base-matrix={\"dir\":$BASE_DIRS}" >> $GITHUB_OUTPUT
+            echo "base-deps-matrix={\"dir\":$BASE_DEPS_DIRS}" >> $GITHUB_OUTPUT
+            echo "whisper-changed=true" >> $GITHUB_OUTPUT
             exit 0
           fi
-          folders=$(git diff --diff-filter="ACMR" --name-only "$base" ${{ github.event.after }} | xargs dirname | awk -F '/' '{print $1}' | sort | uniq | grep -Ev "^\." | awk NF | jq -c --raw-input --slurp 'split("\n") | .[0:-1]')
-          echo $folders | jq .
-          echo "folders=$folders" >> $GITHUB_OUTPUT
 
-  get-tags:
-    needs: [find-jobs]
-    runs-on: ubuntu-24.04
-    outputs:
-      tags: ${{ steps.tags.outputs.tags }}
-    steps:
-      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
-      - id: tags
-        run: |
-          json_array=$(echo '${{ needs.find-jobs.outputs.folders }}' | jq -rc '.[]')
-          TAGS=$(while read -r REPO; do
-            if [ ! -d $REPO/.build-args ]; then
-              echo '{"context":"'${REPO}'", "image":"'${REPO}'", "args":""},'
-              continue
+          BASE="origin/main"
+          if [ "${{ github.ref }}" = "refs/heads/main" ]; then
+            BASE="${{ github.event.before }}"
+            if ! git cat-file -e "$BASE^{commit}" 2>/dev/null; then
+              # Fallback if before is invalid (initial push, force push, etc)
+              echo "Invalid before ref, building everything"
+              echo "base-matrix={\"dir\":$BASE_DIRS}" >> $GITHUB_OUTPUT
+              echo "base-deps-matrix={\"dir\":$BASE_DEPS_DIRS}" >> $GITHUB_OUTPUT
+              echo "whisper-changed=true" >> $GITHUB_OUTPUT
+              exit 0
             fi
-            for TAG in $(ls $REPO/.build-args); do
-              echo '{"context":"'${REPO}'", "image":"'${REPO}'-'${TAG}'", "args":"'$(cat ${REPO}/.build-args/${TAG})'"},'
-            done
-          done <<< "$json_array")
-          TAGS=$(echo "[${TAGS%,}]" | tr -d '\n')
-          echo $TAGS | jq .
-          echo "tags=$TAGS" >> $GITHUB_OUTPUT
+          fi
 
-  build-push-ghcr:
-    name: "docker build+push ${{ matrix.tags.image }} to ghcr.io"
-    needs: [get-tags]
+          echo "Comparing against: $BASE"
+          CHANGED_FILES=$(git diff --name-only $BASE ${{ github.sha }} | jq -R -s -c 'split("\n") | map(select(length > 0))')
+
+          CHANGED_FILES=$(git diff --name-only $BASE ${{ github.sha }} | jq -R -s -c 'split("\n") | map(select(length > 0))')
+          echo "Changed files:"
+          echo "$CHANGED_FILES" | jq -r '.[]'
+
+          BASE_CHANGED=$(echo "$BASE_DIRS" | jq -c --argjson files "$CHANGED_FILES" '[.[] | select(. as $dir | $files | any(startswith($dir + "/")))]')
+          if [ "$BASE_CHANGED" = "[]" ]; then
+            echo "base-matrix={\"dir\":[]}" >> $GITHUB_OUTPUT
+          else
+            echo "base-matrix={\"dir\":$BASE_CHANGED}" >> $GITHUB_OUTPUT
+          fi
+
+          BASE_DEPS_CHANGED=$(echo "$BASE_DEPS_DIRS" | jq -c --argjson files "$CHANGED_FILES" '[.[] | select(. as $dir | $files | any(startswith($dir + "/")))]')
+          if [ "$BASE_DEPS_CHANGED" = "[]" ]; then
+            echo "base-deps-matrix={\"dir\":[]}" >> $GITHUB_OUTPUT
+          else
+            echo "base-deps-matrix={\"dir\":$BASE_DEPS_CHANGED}" >> $GITHUB_OUTPUT
+          fi
+
+          if echo "$CHANGED_FILES" | grep -q "^scyllaridae-whisper/"; then
+            echo "whisper-changed=true" >> $GITHUB_OUTPUT
+          else
+            echo "whisper-changed=false" >> $GITHUB_OUTPUT
+          fi
+
+  base:
+    needs: [detect-changes]
+    if: needs.detect-changes.outputs.base-matrix != '{"dir":[]}'
     strategy:
-      matrix:
-        tags: ${{ fromJson(needs.get-tags.outputs.tags) }}
+      fail-fast: false
+      matrix: ${{ fromJson(needs.detect-changes.outputs.base-matrix) }}
     uses: lehigh-university-libraries/gha/.github/workflows/build-push-ghcr.yaml@main
     with:
-      image: ${{ matrix.tags.image }}
-      context: ${{ matrix.tags.context }}
-      runners: ${{ matrix.tags.image == 'scyllaridae-whisper' && '["ubuntu-24.04"]' || '["ubuntu-24.04", "ubuntu-24.04-arm"]' }}
+      image: ${{ matrix.dir }}
+      context: ${{ matrix.dir }}
+    permissions:
+      contents: read
+      packages: write
+    secrets: inherit
+
+  base-dependencies:
+    needs: [base, detect-changes]
+    if: |
+      always() &&
+      needs.detect-changes.outputs.base-deps-matrix != '{"dir":[]}' &&
+      (needs.base.result == 'success' || needs.base.result == 'skipped')
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJson(needs.detect-changes.outputs.base-deps-matrix) }}
+    uses: lehigh-university-libraries/gha/.github/workflows/build-push-ghcr.yaml@main
+    with:
+      image: ${{ matrix.dir }}
+      context: ${{ matrix.dir }}
+    permissions:
+      contents: read
+      packages: write
+    secrets: inherit
+
+  whisper:
+    needs: [detect-changes]
+    if: needs.detect-changes.outputs.whisper-changed == 'true'
+    uses: lehigh-university-libraries/gha/.github/workflows/build-push-ghcr.yaml@main
+    with:
+      image: scyllaridae-whisper
+      context: scyllaridae-whisper
+      runners: '["ubuntu-24.04"]'
     permissions:
       contents: read
       packages: write

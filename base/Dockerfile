@@ -2,8 +2,15 @@ FROM debian:trixie-slim@sha256:1caf1c703c8f7e15dcf2e7769b35000c764e6f50e4d7401c3
 
 LABEL License="MIT License"
 
+ARG SOURCE_DATE_EPOCH
+
 ENV \
+    # reproducible builds
+    SOURCE_DATE_EPOCH=${SOURCE_DATE_EPOCH:-0} \
     DEBIAN_FRONTEND=noninteractive \
+    PYTHONDONTWRITEBYTECODE=1 \
+    TZ=UTC \
+    # s6-overlay/confd defaults
     CERTIFICATE_AUTHORITY=/usr/local/share/ca-certificates/rootCA.pem \
     CERTIFICATE=/usr/local/share/ca-certificates/cert.pem \
     CONFD_BACKEND=env \
@@ -29,7 +36,6 @@ ENV \
     DB_ROOT_USER=root \
     DB_USER=default \
     DEVELOPMENT_ENVIRONMENT=false \
-    JWT_ADMIN_TOKEN=islandora \
     UID= \
     DOWNLOAD_CACHE_DIRECTORY=/opt/downloads
 
@@ -62,7 +68,8 @@ ARG \
   # renovate: datasource=repology depName=debian_13/wget
   XZ_UTILS_VERSION=5.8.1-1
 
-RUN apt-get update && apt-get install -y \
+RUN --mount=type=cache,target=/var/cache/apt \
+    apt-get update && apt-get install -y \
         bash=${BASH_VERSION} \
         ca-certificates=${CA_CERTIFICATES_VERSION} \
         curl=${CURL_VERSION} \
