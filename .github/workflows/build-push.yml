@@ -42,18 +42,18 @@ jobs:
             BASE="${{ github.event.before }}"
           fi
 
-          CHANGED_FILES=$(git diff --name-only $BASE ${{ github.sha }} || echo "")
+          CHANGED_FILES=$(git diff --name-only $BASE ${{ github.sha }} | jq -R -s -c 'split("\n") | map(select(length > 0))')
           echo "Changed files:"
-          echo "$CHANGED_FILES"
+          echo "$CHANGED_FILES" | jq -r '.[]'
 
-          BASE_CHANGED=$(echo "$BASE_DIRS" | jq -c '[.[] | select(. as $dir | env.CHANGED_FILES | split("\n") | any(startswith($dir + "/")))]' --arg CHANGED_FILES "$CHANGED_FILES")
+          BASE_CHANGED=$(echo "$BASE_DIRS" | jq -c --argjson files "$CHANGED_FILES" '[.[] | select(. as $dir | $files | any(startswith($dir + "/")))]')
           if [ "$BASE_CHANGED" = "[]" ]; then
             echo "base-matrix={\"dir\":[]}" >> $GITHUB_OUTPUT
           else
             echo "base-matrix={\"dir\":$BASE_CHANGED}" >> $GITHUB_OUTPUT
           fi
 
-          BASE_DEPS_CHANGED=$(echo "$BASE_DEPS_DIRS" | jq -c '[.[] | select(. as $dir | env.CHANGED_FILES | split("\n") | any(startswith($dir + "/")))]' --arg CHANGED_FILES "$CHANGED_FILES")
+          BASE_DEPS_CHANGED=$(echo "$BASE_DEPS_DIRS" | jq -c --argjson files "$CHANGED_FILES" '[.[] | select(. as $dir | $files | any(startswith($dir + "/")))]')
           if [ "$BASE_DEPS_CHANGED" = "[]" ]; then
             echo "base-deps-matrix={\"dir\":[]}" >> $GITHUB_OUTPUT
           else
