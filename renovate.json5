@@ -10,9 +10,9 @@
         'docker',
       ],
       matchPackageNames: [
-        'ghcr.io/lehigh-university-libraries/base'
+        'ghcr.io/lehigh-university-libraries/base',
       ],
-      pinDigests: false
+      pinDigests: false,
     },
   ],
 }
