@@ -47,9 +47,6 @@ fi
 # Confd backend variable needs to be normalized.
 CONFD_BACKEND=$(</var/run/s6/container_environment/CONFD_BACKEND)
 case "${CONFD_BACKEND}" in
-etcd | etcdv3)
-    CONFD_BACKEND="etcdv3"
-    ;;
 env)
     CONFD_BACKEND="env"
     ;;

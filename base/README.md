@@ -21,6 +21,16 @@ it's configuration, they must be set on each container as environment variables.
 | CONFD_LOG_LEVEL         | error   | The log level to use when executing `confd`                                       |
 | CONFD_POLLING_INTERVAL  | 30      | Time in seconds between runs of `confd` when enabled as a service                 |
 
+### Certificate Settings
+
+If using self-signed certificates, they can be made
+available within the containers using the following environment variables.
+
+| Environment Variable | Default | Description                                   |
+| :------------------- | :------ | :-------------------------------------------- |
+| CERT_PUBLIC_KEY      |         | Public CA to add to container CA trust store. |
+
+
 ### Database Settings
 
 Many services can work with multiple backends, to this end the `DB_DRIVER`

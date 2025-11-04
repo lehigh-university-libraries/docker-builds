@@ -63,9 +63,14 @@ jobs:
           else
             echo "base-matrix={\"dir\":$BASE_CHANGED}" >> $GITHUB_OUTPUT
           fi
-
+          
           BASE_DEPS_CHANGED=$(echo "$BASE_DEPS_DIRS" | jq -c --argjson files "$CHANGED_FILES" '[.[] | select(. as $dir | $files | any(startswith($dir + "/")))]')
-          if [ "$BASE_DEPS_CHANGED" = "[]" ]; then
+          # If base directory changed, rebuild all base-deps
+          BASE_DIR_CHANGED=$(echo "$BASE_CHANGED" | jq -r 'any(. == "base")')
+          if [ "$BASE_DIR_CHANGED" = "true" ]; then
+            echo "Base directory changed, building all base-deps"
+            echo "base-deps-matrix={\"dir\":$BASE_DEPS_DIRS}" >> $GITHUB_OUTPUT
+          elif [ "$BASE_DEPS_CHANGED" = "[]" ]; then
             echo "base-deps-matrix={\"dir\":[]}" >> $GITHUB_OUTPUT
           else
             echo "base-deps-matrix={\"dir\":$BASE_DEPS_CHANGED}" >> $GITHUB_OUTPUT
