@@ -23,7 +23,7 @@ jobs:
           ALL_DIRS=$(ls -d */ 2>/dev/null | sed 's/\///' | grep -v '^\.' | jq -R -s -c 'split("\n") | map(select(length > 0))')
 
           # Define special cases
-          BASE_DEPS_DIRS='["go"]'
+          BASE_DEPS_DIRS='["go", "python3.13"]'
           WHISPER_DIR="scyllaridae-whisper"
 
           # Calculate BASE_DIRS by filtering out BASE_DEPS and whisper

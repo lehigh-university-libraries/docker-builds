@@ -1,14 +1,14 @@
 # python-3.12
 
-Docker image for python 3.12.
+Docker image for python 3.13.
 
 Acts as base Docker image for python apps developed at Lehigh. This docker image is not meant to
 be run on its own it is only used as a base `FROM` image for Lehigh python apps.
 
 ## Dependencies
 
-Requires `islandora/base` docker image to build. Please refer to the
-[Base Image README](https://github.com/Islandora-Devops/isle-buildkit/blob/main/base/README.md) for additional information including
+Requires `ghcr.io/lehigh-university-libraries/base` docker image to build. Please refer to the
+[Base Image README](../base/README.md) for additional information including
 additional settings, volumes, ports, etc.
 
 ## Ports
