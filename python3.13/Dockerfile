@@ -4,14 +4,14 @@ FROM ghcr.io/lehigh-university-libraries/base:${LEHIGH_TAG}
 WORKDIR /app
 
 ARG \
-    # renovate: datasource=repology depName=debian13/py3-pip
-    PIP_VERSION=25.1.1-r0 \
-    # renovate: datasource=repology depName=debian13/python3
-    PYTHON_VERSION=3.12.12-r0
+    # renovate: datasource=repology depName=debian_13/python3-pip
+    PIP_VERSION=25.1.1+dfsg-1 \
+    # renovate: datasource=repology depName=debian_13/python3
+    PYTHON_VERSION=3.13.5-1
 
 RUN apt-get update && apt-get install -y \
-        python3-pip \
-        python3 \
+        python3-pip=${PIP_VERSION} \
+        python3=${PYTHON_VERSION} \
     && cleanup.sh
 
 RUN create-service-user.sh --name pyapp && \
