@@ -28,5 +28,3 @@ RUN --mount=type=cache,id=base-downloads-${TARGETARCH},sharing=locked,target=/op
 ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/go/bin
 
 RUN go version | grep "${GO_VERSION}"
-
-COPY --link rootfs /
