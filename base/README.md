@@ -23,7 +23,7 @@ it's configuration, they must be set on each container as environment variables.
 
 ### Certificate Settings
 
-If using development certificates for local development, they can be made
+If using self-signed certificates, they can be made
 available within the containers using the following environment variables.
 
 | Environment Variable | Default | Description                                   |
