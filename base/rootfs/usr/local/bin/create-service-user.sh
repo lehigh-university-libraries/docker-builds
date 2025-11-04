@@ -92,14 +92,14 @@ function main {
     user="${NAME}"
     group="${NAME}"
     mkdir -p "${install_directory}"
-    addgroup "${group}" # Primary group is always the same as the name.
+    groupadd -r "${group}" # Primary group is always the same as the name.
     # Users that run services should permit login and should not require passwords.
-    adduser --system --disabled-password --no-create-home --ingroup "${group}" --shell /sbin/nologin --home "${install_directory}" "${user}"
+    useradd --system --no-create-home --gid "${group}" --shell /usr/sbin/nologin --home-dir "${install_directory}" "${user}"
     # User also needs to be a member of tty to write directly to /dev/stdout, etc.
-    addgroup "${user}" tty
+    usermod -aG tty "${user}"
     # Optional secondary group.
     if [[ -v GROUP ]]; then
-        addgroup "${NAME}" "${GROUP}"
+        usermod -aG "${GROUP}" "${NAME}"
     fi
     if ((${#DIRECTORIES[@]})); then
         mkdir -p "${DIRECTORIES[@]}"
