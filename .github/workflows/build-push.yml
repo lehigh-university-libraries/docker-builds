@@ -38,6 +38,18 @@ jobs:
           fi
 
           BASE="origin/main"
+          if [ "${{ github.ref }}" = "refs/heads/main" ]; then
+            BASE="${{ github.event.before }}"
+            if ! git cat-file -e "$BASE^{commit}" 2>/dev/null; then
+              # Fallback if before is invalid (initial push, force push, etc)
+              echo "Invalid before ref, building everything"
+              echo "base-matrix={\"dir\":$BASE_DIRS}" >> $GITHUB_OUTPUT
+              echo "base-deps-matrix={\"dir\":$BASE_DEPS_DIRS}" >> $GITHUB_OUTPUT
+              echo "whisper-changed=true" >> $GITHUB_OUTPUT
+              exit 0
+            fi
+          fi
+
           echo "Comparing against: $BASE"
           CHANGED_FILES=$(git diff --name-only $BASE ${{ github.sha }} | jq -R -s -c 'split("\n") | map(select(length > 0))')
 
