@@ -1,0 +1,8 @@
+#!/command/with-contenv bash
+
+set -eou pipefail
+
+cd /app
+
+exec s6-setuidgid pyapp gunicorn -c /app/gunicorn.conf.py "${FLASK_APP}"
+
