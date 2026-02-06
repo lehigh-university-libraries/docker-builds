@@ -1,5 +1,5 @@
-FROM islandora/scyllaridae:6@sha256:d8253051949967ac316392853986e69bcba791bf06d24f854716910a4a69de98 AS scyllaridae
-FROM pandoc/latex:3.7-ubuntu@sha256:b035cf4b287f0582d73e31e881e4a8816a8ca902812da93ed86f72579f0cda79 AS pandoc
+FROM islandora/scyllaridae:6@sha256:4a45cf205eb89eb3fb420aed8f7d9066b28c5f5cfd8931505c673c4d45e15d23 AS scyllaridae
+FROM pandoc/latex:3.9-ubuntu@sha256:ff9e07bec35187b9af90eecb25049b4497ec34d83298fbf2615ea0070c421346 AS pandoc
 
 ARG \
   # renovate: datasource=repology depName=ubuntu_24_04/curl
@@ -24,7 +24,6 @@ RUN apt-get update \
 
 WORKDIR /app
 COPY --from=scyllaridae /app/scyllaridae /app/scyllaridae
-COPY --from=scyllaridae /app/docker-entrypoint.sh /app/docker-entrypoint.sh
 COPY . /app
 
 ENV \

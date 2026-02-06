@@ -1,10 +1,10 @@
-FROM ubuntu:24.04@sha256:353675e2a41babd526e2b837d7ec780c2a05bca0164f7ea5dbbd433d21d166fc
+FROM ubuntu:24.04@sha256:cd1dba651b3080c3686ecf4e3c4220f026b521fb76978881737d24f200828b2b
 
 ARG \
   # renovate: datasource=github-releases depName=gha-runner packageName=actions/runner
-  RUNNER_VERSION=2.326.0 \
+  RUNNER_VERSION=2.331.0 \
   RUNNER_PLATFORM=linux-x64 \
-  RUNNER_SHA=9c74af9b4352bbc99aecc7353b47bcdfcd1b2a0f6d15af54a99f54a0c14a1de8
+  RUNNER_SHA=5fcc01bd546ba5c3f1291c2803658ebd3cedb3836489eda3be357d41bfcf28a7
 
 WORKDIR /app
 
@@ -67,10 +67,10 @@ RUN curl -o actions-runner.tar.gz -L https://github.com/actions/runner/releases/
 
 # install composer
 # renovate: datasource=github-releases depName=custom-composer packageName=composer/composer
-ARG COMPOSER_VERSION=2.8.11
+ARG COMPOSER_VERSION=2.9.5
 ARG COMPOSER_FILE=composer.phar
 ARG COMPOSER_URL=https://getcomposer.org/download/${COMPOSER_VERSION}/${COMPOSER_FILE}
-ARG COMPOSER_SHA256="257a969e9a9d27e0e45cfe954835c17a76033ba84a388e0f472db83eded65a8b"
+ARG COMPOSER_SHA256="c86ce603fe836bf0861a38c93ac566c8f1e69ac44b2445d9b7a6a17ea2e9972a"
 RUN curl -sLo "${COMPOSER_FILE}" "${COMPOSER_URL}" && \
     echo "${COMPOSER_SHA256}  ${COMPOSER_FILE}" | sha256sum -c && \
     mv "${COMPOSER_FILE}" /usr/bin/composer && \
