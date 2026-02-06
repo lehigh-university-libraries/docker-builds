@@ -42,7 +42,7 @@ ENV \
 ARG \
   TARGETARCH=amd64 \
   # renovate: datasource=repology depName=debian_13/bash
-  BASH_VERSION=5.2.37-2 \
+  BASH_VERSION=5.2.37-2+b7 \
   # renovate: datasource=repology depName=debian_13/ca-certificates
   CA_CERTIFICATES_VERSION=20250419 \
   # renovate: datasource=repology depName=debian_13/curl
