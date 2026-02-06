@@ -42,13 +42,13 @@ ENV \
 ARG \
   TARGETARCH=amd64 \
   # renovate: datasource=repology depName=debian_13/bash
-  BASH_VERSION=5.2.37-2+b5 \
+  BASH_VERSION=5.2.37-2 \
   # renovate: datasource=repology depName=debian_13/ca-certificates
   CA_CERTIFICATES_VERSION=20250419 \
   # renovate: datasource=repology depName=debian_13/curl
   CURL_VERSION=8.14.1-2+deb13u2 \
-  # renovate: datasource=repology depName=debian_13/gnupg
-  GNUPG_VERSION=2.4.7-21 \
+  # renovate: datasource=repology depName=debian_13/gnupg2
+  GNUPG_VERSION=2.4.7-21+deb13u1 \
   # renovate: datasource=repology depName=debian_13/gzip
   GZIP_VERSION=1.13-1 \
   # renovate: datasource=repology depName=debian_13/jq
@@ -73,7 +73,7 @@ RUN --mount=type=cache,target=/var/cache/apt \
         bash=${BASH_VERSION} \
         ca-certificates=${CA_CERTIFICATES_VERSION} \
         curl=${CURL_VERSION} \
-        gnupg=${GNUPG_VERSION} \
+        gnupg2=${GNUPG_VERSION} \
         gzip=${GZIP_VERSION} \
         jq=${JQ_VERSION} \
         netcat-openbsd=${NETCAT_OPENBSD_VERSION} \
