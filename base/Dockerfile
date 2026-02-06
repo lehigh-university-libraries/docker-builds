@@ -1,4 +1,4 @@
-FROM debian:trixie-slim@sha256:1caf1c703c8f7e15dcf2e7769b35000c764e6f50e4d7401c355fb0248f3ddfdb
+FROM debian:trixie-slim@sha256:f6e2cfac5cf956ea044b4bd75e6397b4372ad88fe00908045e9a0d21712ae3ba
 
 LABEL License="MIT License"
 
@@ -46,7 +46,7 @@ ARG \
   # renovate: datasource=repology depName=debian_13/ca-certificates
   CA_CERTIFICATES_VERSION=20250419 \
   # renovate: datasource=repology depName=debian_13/curl
-  CURL_VERSION=8.14.1-2 \
+  CURL_VERSION=8.14.1-2+deb13u2 \
   # renovate: datasource=repology depName=debian_13/gnupg
   GNUPG_VERSION=2.4.7-21 \
   # renovate: datasource=repology depName=debian_13/gzip
@@ -56,7 +56,7 @@ ARG \
   # renovate: datasource=repology depName=debian_13/netcat-openbsd	
   NETCAT_OPENBSD_VERSION=1.229-1 \
   # renovate: datasource=repology depName=debian_13/openssl
-  OPENSSL_VERSION=3.5.1-1+deb13u1 \
+  OPENSSL_VERSION=3.5.4-1~deb13u2 \
   # renovate: datasource=repology depName=debian_13/patch
   PATCH_VERSION=2.8-2 \
   # renovate: datasource=repology depName=debian_13/procps-ng
@@ -87,7 +87,7 @@ RUN --mount=type=cache,target=/var/cache/apt \
 SHELL ["/bin/bash", "-euo", "pipefail", "-c"]
 
 # renovate: datasource=github-releases depName=s6-overlay packageName=just-containers/s6-overlay
-ARG S6_VERSION=3.2.1.0
+ARG S6_VERSION=3.2.2.0
 ARG S6_BASE_URL="https://github.com/just-containers/s6-overlay/releases/download/v${S6_VERSION}"
 ARG S6_OVERLAY_NOARCH=s6-overlay-noarch.tar.xz
 ARG S6_OVERLAY_NOARCH_SHA256="42e038a9a00fc0fef70bf0bc42f625a9c14f8ecdfe77d4ad93281edf717e10c5"

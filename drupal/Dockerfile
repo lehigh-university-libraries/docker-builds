@@ -1,10 +1,10 @@
-FROM islandora/imagemagick:5@sha256:20e287ad869562d1c9e78b44dd43120d0b5a34c4b7b04faf9d9e713c12195c36 AS imagemagick
-FROM islandora/leptonica:5@sha256:ca7aca3089756820834a76b37fa14a6c62fed669d076dd1f610f8713d8a98657 AS leptonica
-FROM islandora/drupal:6@sha256:b0c00ba742df4a5dcfb3fc2ce89f7ebee1ad8c6f1ed91ee30b44d048ca296dd2
+FROM islandora/imagemagick:5@sha256:22dd5383708c51479d31adea84a2f5e950dd5f79cf38a06178438e03fd23b4c2 AS imagemagick
+FROM islandora/leptonica:5@sha256:d2583004176c4b4e63e84d3879f3de496c350171eb57747138c8f6097d8d2ca1 AS leptonica
+FROM islandora/drupal:6@sha256:788384040712696c45563d82ed83d61ced9cbbae562cc5ad6f5179440bc3b459
 
 ARG \
     # renovate: datasource=repology depName=alpine_3_22/php83
-    PHP_VERSION=8.3.26-r0 \
+    PHP_VERSION=8.3.29-r0 \
     # renovate: datasource=repology depName=alpine_3_22/php83-pecl-uploadprogress
     PHP_MEMCACHE_VERSION=8.2-r0 \
     # renovate: datasource=repology depName=alpine_3_22/php83-pecl-uploadprogress
@@ -16,7 +16,7 @@ ARG \
     # renovate: datasource=repology depName=alpine_3_22/poppler-utils
     POPPLER_VERSION=25.04.0-r0 \
     # renovate: datasource=repology depName=alpine_3_22/rsync
-    RSYNC_VERSION=3.4.1-r0
+    RSYNC_VERSION=3.4.1-r1
 
 RUN --mount=type=bind,from=imagemagick,source=/packages,target=/packages \
     --mount=type=bind,from=imagemagick,source=/etc/apk/keys,target=/etc/apk/keys-imagemagick \
