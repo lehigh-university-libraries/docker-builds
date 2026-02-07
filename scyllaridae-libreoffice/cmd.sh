@@ -1,19 +1,28 @@
 #!/usr/bin/env bash
-
-# take input from stdin and print to stdout
-
 set -eou pipefail
-
-input_temp=$(mktemp /tmp/libreoffice-input-XXXXXX)
-PDF="/app/$(basename "$input_temp").pdf"
+TMP_DIR=$(mktemp -d /tmp/libreoffice-XXXXXX)
+TMP_FILE="$TMP_DIR/input"
+PDF="$TMP_DIR/input.pdf"
+PROFILE_DIR="$TMP_DIR/profile"
 
 cleanup() {
-  rm -rf "$input_temp" "$PDF"
+  rm -rf "$TMP_DIR"
 }
 trap cleanup EXIT
 
-cat > "$input_temp"
+cat > "$TMP_FILE"
 
-libreoffice --headless --convert-to pdf "$input_temp" > /dev/null 2>&1
+libreoffice \
+  --headless \
+  --convert-to pdf \
+  "$TMP_FILE" \
+  --outdir "$TMP_DIR" \
+  -env:UserInstallation=file://"$PROFILE_DIR"
+
+if ! file "$PDF" | grep -q PDF; then
+  echo "Failed to create PDF" >&2
+  exit 1
+fi
 
 cat "$PDF"
+
