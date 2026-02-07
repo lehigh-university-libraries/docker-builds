@@ -1,5 +1,5 @@
 FROM islandora/imagemagick:6@sha256:f1926d3a0424551602995d117e4b3908d5e201ac2e02f301a07bfa6d31936627 AS imagemagick
-FROM islandora/leptonica:5@sha256:d2583004176c4b4e63e84d3879f3de496c350171eb57747138c8f6097d8d2ca1 AS leptonica
+FROM islandora/leptonica:6@sha256:f044822af7a42182c591335811bafa914d2866fc8be23d4d0936506dd5fa53d9 AS leptonica
 FROM islandora/drupal:6@sha256:788384040712696c45563d82ed83d61ced9cbbae562cc5ad6f5179440bc3b459
 
 ARG \
