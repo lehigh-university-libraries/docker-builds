@@ -37,5 +37,3 @@ RUN --mount=type=bind,from=leptonica,source=/packages,target=/packages \
     poppler-utils=="${POPPLER_VERSION}"
 
 COPY . /app
-
-ENTRYPOINT ["/app/docker-entrypoint.sh"]
