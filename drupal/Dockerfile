@@ -35,3 +35,29 @@ RUN --mount=type=bind,from=imagemagick,source=/packages,target=/packages \
       poppler-utils=="${POPPLER_VERSION}" \
       rsync=="${RSYNC_VERSION}" && \
     cleanup.sh
+
+
+ARG \
+  TARGETARCH \
+  # renovate: datasource=github-releases depName=crosswalk packageName=lehigh-university-libraries/crosswalk
+  CROSSWALK_VERSION=0.3.0 \
+  CROSSWALK_BASE_URL="https://github.com/lehigh-university-libraries/crosswalk/releases/download/v${CROSSWALK_VERSION}" \
+  CROSSWALK_AMD64=crosswalk_Linux_x86_64.tar.gz   \
+  CROSSWALK_AMD64_SHA256="6e9987538b5be69d4906cc462e0cc6edee9f89fa44f6c186cb42c8df8a9efcfc" \
+  CROSSWALK_ARM64=crosswalk_Linux_arm64.tar.gz \
+  CROSSWALK_ARM64_SHA256="64e30198dcc21067d78738270c7d8f8c0ee46e8dfdf9340a71b49ccf62db6e37"
+
+RUN --mount=type=cache,id=crosswalk-downloads-${TARGETARCH},sharing=locked,target=/opt/downloads \
+    if [ "${TARGETARCH}" = "amd64" ]; \
+    then \
+        download.sh \
+            --url "${CROSSWALK_BASE_URL}/${CROSSWALK_AMD64}" \
+            --sha256 "${CROSSWALK_AMD64_SHA256}" \
+            --dest /usr/local/bin ; \
+    else \
+        download.sh \
+            --url "${CROSSWALK_BASE_URL}/${CROSSWALK_ARM64}" \
+            --sha256 "${CROSSWALK_ARM64_SHA256}" \
+            --dest /usr/local/bin ; \
+    fi
+
