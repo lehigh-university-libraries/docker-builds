@@ -1,4 +1,4 @@
-FROM islandora/scyllaridae:6@sha256:4a45cf205eb89eb3fb420aed8f7d9066b28c5f5cfd8931505c673c4d45e15d23
+FROM islandora/scyllaridae:6@sha256:15cd75ac369601c61d22e6b85342cb05bd8361fdcd552dac3825fec0ac8819e8
 
 ARG \
   # renovate: datasource=repology depName=alpine_3_22/ffmpeg

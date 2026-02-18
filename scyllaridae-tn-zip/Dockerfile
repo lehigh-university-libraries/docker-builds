@@ -1,6 +1,6 @@
 
-FROM islandora/imagemagick:main@sha256:d9fe60f2cb43daf531cc764612eb710f3a92643136e15c2e821d5deb370805b1 AS imagemagick
-FROM islandora/scyllaridae:6@sha256:4a45cf205eb89eb3fb420aed8f7d9066b28c5f5cfd8931505c673c4d45e15d23
+FROM islandora/imagemagick:main@sha256:ce3c9fba43e462787831c26e6e464c4528bcca972cdd588d6e2ff5465a77438d AS imagemagick
+FROM islandora/scyllaridae:6@sha256:15cd75ac369601c61d22e6b85342cb05bd8361fdcd552dac3825fec0ac8819e8
 
 SHELL ["/bin/ash", "-o", "pipefail", "-c"]
 
