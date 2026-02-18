@@ -1,6 +1,6 @@
-FROM islandora/imagemagick:6@sha256:f1926d3a0424551602995d117e4b3908d5e201ac2e02f301a07bfa6d31936627 AS imagemagick
-FROM islandora/leptonica:6@sha256:f044822af7a42182c591335811bafa914d2866fc8be23d4d0936506dd5fa53d9 AS leptonica
-FROM islandora/drupal:6@sha256:788384040712696c45563d82ed83d61ced9cbbae562cc5ad6f5179440bc3b459
+FROM islandora/imagemagick:6@sha256:68725952f686e5a8ddf2c838c64fb9268dd954b3964826b4ba5251a57bcd7449 AS imagemagick
+FROM islandora/leptonica:6@sha256:65484c3ef232577b82442d3cf2b35ed2eaffb217899df2f17243cc1d3917986a AS leptonica
+FROM islandora/drupal:6@sha256:c212723aea572ee54e0ba83ee94474d998e8a9fb4818026f37cee47fbc9e761f
 
 ARG \
     # renovate: datasource=repology depName=alpine_3_22/php83
@@ -40,7 +40,7 @@ RUN --mount=type=bind,from=imagemagick,source=/packages,target=/packages \
 ARG \
   TARGETARCH \
   # renovate: datasource=github-releases depName=crosswalk packageName=lehigh-university-libraries/crosswalk
-  CROSSWALK_VERSION=0.3.0 \
+  CROSSWALK_VERSION=0.3.1 \
   CROSSWALK_BASE_URL="https://github.com/lehigh-university-libraries/crosswalk/releases/download/v${CROSSWALK_VERSION}" \
   CROSSWALK_AMD64=crosswalk_Linux_x86_64.tar.gz   \
   CROSSWALK_AMD64_SHA256="6e9987538b5be69d4906cc462e0cc6edee9f89fa44f6c186cb42c8df8a9efcfc" \
