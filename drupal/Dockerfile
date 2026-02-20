@@ -24,12 +24,12 @@ RUN apk update && \
 ARG \
   TARGETARCH \
   # renovate: datasource=github-releases depName=crosswalk packageName=lehigh-university-libraries/crosswalk
-  CROSSWALK_VERSION=0.3.2 \
+  CROSSWALK_VERSION=0.3.9 \
   CROSSWALK_BASE_URL="https://github.com/lehigh-university-libraries/crosswalk/releases/download/v${CROSSWALK_VERSION}" \
   CROSSWALK_AMD64=crosswalk_Linux_x86_64.tar.gz   \
-  CROSSWALK_AMD64_SHA256="52784352d5e08b9d91f198d8c73d84722f28e82f40d6fd9011629cb267ee94c5" \
+  CROSSWALK_AMD64_SHA256="77b29f8f34c030d6b52194b7d9dcb41b087810a984be43f8c9615316658ef2fe" \
   CROSSWALK_ARM64=crosswalk_Linux_arm64.tar.gz \
-  CROSSWALK_ARM64_SHA256="71f3e667882a46deaf05b52a73ffe2d24ced8410f42d805b7709672f0b79e709"
+  CROSSWALK_ARM64_SHA256="b4ed72b250ce1f774d54f39171b783b8745b4eb2b313ea221da75f5aa7967ab5"
 
 RUN --mount=type=cache,id=crosswalk-downloads-${TARGETARCH},sharing=locked,target=/opt/downloads \
     if [ "${TARGETARCH}" = "amd64" ]; \
