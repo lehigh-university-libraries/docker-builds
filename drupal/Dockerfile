@@ -1,6 +1,8 @@
 FROM islandora/drupal:6@sha256:c212723aea572ee54e0ba83ee94474d998e8a9fb4818026f37cee47fbc9e761f
 
 ARG \
+    # renovate: datasource=repology depName=alpine_3_22/ffmpeg
+    FFMPEG_VERSION=6.1.2-r2 \
     # renovate: datasource=repology depName=alpine_3_22/php83
     PHP_VERSION=8.3.29-r0 \
     # renovate: datasource=repology depName=alpine_3_22/php83-pecl-memcache
@@ -14,6 +16,7 @@ ARG \
 
 RUN apk update && \
     apk add --no-cache \
+      ffmpeg=="${FFMPEG_VERSION}" \
       php83-pdo_sqlite=="${PHP_VERSION}" \
       php83-pecl-uploadprogress=="${PHP_UPLOAD_VERSION}" \
       php83-pecl-memcache=="${PHP_MEMCACHE_VERSION}" \
