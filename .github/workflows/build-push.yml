@@ -88,7 +88,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix: ${{ fromJson(needs.detect-changes.outputs.base-matrix) }}
-    uses: lehigh-university-libraries/gha/.github/workflows/build-push-ghcr.yaml@main
+    uses: lehigh-university-libraries/gha/.github/workflows/build-push-ghcr.yaml@0ad0a7d96a7b3a5c05ad811832108d67e3dea92c # main
     with:
       image: ${{ matrix.dir }}
       context: ${{ matrix.dir }}
@@ -106,7 +106,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix: ${{ fromJson(needs.detect-changes.outputs.base-deps-matrix) }}
-    uses: lehigh-university-libraries/gha/.github/workflows/build-push-ghcr.yaml@main
+    uses: lehigh-university-libraries/gha/.github/workflows/build-push-ghcr.yaml@0ad0a7d96a7b3a5c05ad811832108d67e3dea92c # main
     with:
       image: ${{ matrix.dir }}
       context: ${{ matrix.dir }}
@@ -118,7 +118,7 @@ jobs:
   whisper:
     needs: [detect-changes]
     if: needs.detect-changes.outputs.whisper-changed == 'true'
-    uses: lehigh-university-libraries/gha/.github/workflows/build-push-ghcr.yaml@main
+    uses: lehigh-university-libraries/gha/.github/workflows/build-push-ghcr.yaml@0ad0a7d96a7b3a5c05ad811832108d67e3dea92c # main
     with:
       image: scyllaridae-whisper
       context: scyllaridae-whisper
