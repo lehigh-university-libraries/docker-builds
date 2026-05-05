@@ -1,4 +1,4 @@
-FROM islandora/drupal:6@sha256:c212723aea572ee54e0ba83ee94474d998e8a9fb4818026f37cee47fbc9e761f
+FROM islandora/drupal:6@sha256:882fc39ea49fa0e39e5391b4b85a3556fcd499a72443274495f0f0257d3bf849
 
 ARG \
     # renovate: datasource=repology depName=alpine_3_22/ffmpeg
@@ -12,7 +12,7 @@ ARG \
     # renovate: datasource=repology depName=alpine_3_22/php83-pecl-xhprof
     PHP_XHPROF_VERSION=2.3.10-r0 \
     # renovate: datasource=repology depName=alpine_3_22/rsync
-    RSYNC_VERSION=3.4.1-r1
+    RSYNC_VERSION=3.4.2-r0
 
 RUN apk update && \
     apk add --no-cache \
