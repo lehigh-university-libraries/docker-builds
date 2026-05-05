@@ -20,10 +20,11 @@ RUN create-service-user.sh --name pyapp && \
 ENV PIP_BREAK_SYSTEM_PACKAGES=1 \
     FLASK_APP="application.app:app" \
     WORKERS=4 \
-    SCRIPT_NAME=
+    SCRIPT_NAME= \
+    PORT=8080
 
 RUN pip install uv && uv --version
 
 COPY --link rootfs /
 
-HEALTHCHECK CMD curl -f http://localhost:8080${SCRIPT_NAME}healthcheck
+HEALTHCHECK CMD curl -f http://localhost:${PORT}${SCRIPT_NAME}healthcheck
