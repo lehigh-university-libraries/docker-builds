@@ -21,12 +21,17 @@ if [[ "$EXT" == "m3u8" ]]; then
     ffmpeg -hide_banner -loglevel error \
     -protocol_whitelist https,fd,tls,tcp,pipe \
     -f hls -i - -vn -acodec pcm_s16le \
-    -ar 16000 -ac 2 "$output_file" > /dev/null 2>&1
+    -ar 16000 -ac 1 "$output_file" > /dev/null
 else
-  # For other formats, pass input URL directly to ffmpeg to convert to wav
+  # For other formats, read the streamed input from stdin and convert to wav
   ffmpeg -hide_banner -loglevel error \
-    -i "$INPUT_URL" -vn -acodec pcm_s16le \
-    -ar 16000 -ac 2 "$output_file" > /dev/null 2>&1
+    -i - -vn -acodec pcm_s16le \
+    -ar 16000 -ac 1 "$output_file" > /dev/null
+fi
+
+if [ ! -s "$output_file" ]; then
+  echo "ffmpeg did not produce a WAV file for input: $INPUT_URL" >&2
+  exit 1
 fi
 
 if [ -n "${CUDA_VISIBLE_DEVICES:-}" ]; then
@@ -41,12 +46,12 @@ fi
   -m /app/models/ggml-medium.en.bin \
   --output-vtt \
   -f "$output_file" \
-  --output-file "$input_temp" > /dev/null 2>&1 || true
+  --output-file "$input_temp" > /dev/null || true
 
 STATUS=$(grep -q WEBVTT "$input_temp.vtt" || echo "FAIL")
 if [ "$STATUS" != "FAIL" ]; then
   cat "$input_temp.vtt"
 else
+  echo "Failed to generate VTT output for input: $INPUT_URL" >&2
   exit 1
 fi
-
