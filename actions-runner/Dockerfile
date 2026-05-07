@@ -79,7 +79,7 @@ RUN curl -sLo "${COMPOSER_FILE}" "${COMPOSER_URL}" && \
 # install islandora workbench python dependencies
 WORKDIR /workbench
 RUN curl -o workbench.zip -L https://github.com/lehigh-university-libraries/islandora_workbench/archive/refs/heads/simple-field-json.zip && \
-  echo "bb2725b42330f319df09d955b149023f08c00b88d623d8e50a817c6b5f493811  workbench.zip" | sha256sum -c && \
+  echo "9f3ed6353bd880c99a8095ea9c053ecebc48210b9654c24b87dcbc3a1f6a2665  workbench.zip" | sha256sum -c && \
   unzip -oj ./workbench.zip && \
   rm ./workbench.zip && \
   python3 -m build --no-isolation && \
