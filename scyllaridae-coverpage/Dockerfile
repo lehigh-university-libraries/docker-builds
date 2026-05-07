@@ -3,7 +3,7 @@ FROM pandoc/latex:3.9-ubuntu@sha256:601777bf5e7b9642ce7acdd46eef1daa69b4efdc47a5
 
 ARG \
   # renovate: datasource=repology depName=ubuntu_24_04/curl
-  CURL_VERSION="8.5.0-2ubuntu10.6" \
+  CURL_VERSION="8.5.0-2ubuntu10.9" \
   # renovate: datasource=repology depName=ubuntu_24_04/bash
   BASH_VERSION="5.2.21-2ubuntu4" \
   # renovate: datasource=repology depName=ubuntu_24_04/ghostscript
@@ -11,7 +11,7 @@ ARG \
   # renovate: datasource=repology depName=ubuntu_24_04/gosu
   GOSU_VERSION="1.17-1ubuntu0.24.04.2" \
   # renovate: datasource=repology depName=ubuntu_24_04/jq
-  JQ_VERSION="1.7.1-3ubuntu0.24.04.1"
+  JQ_VERSION="1.7.1-3ubuntu0.24.04.2"
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
