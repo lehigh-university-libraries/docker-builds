@@ -1,4 +1,4 @@
-FROM debian:trixie-slim@sha256:f6e2cfac5cf956ea044b4bd75e6397b4372ad88fe00908045e9a0d21712ae3ba
+FROM debian:trixie-slim@sha256:cedb1ef40439206b673ee8b33a46a03a0c9fa90bf3732f54704f99cb061d2c5a
 
 LABEL License="MIT License"
 
@@ -42,7 +42,7 @@ ENV \
 ARG \
   TARGETARCH=amd64 \
   # renovate: datasource=repology depName=debian_13/bash
-  BASH_VERSION=5.2.37-2+b7 \
+  BASH_VERSION=5.2.37-2+b8 \
   # renovate: datasource=repology depName=debian_13/ca-certificates
   CA_CERTIFICATES_VERSION=20250419 \
   # renovate: datasource=repology depName=debian_13/curl
@@ -56,7 +56,7 @@ ARG \
   # renovate: datasource=repology depName=debian_13/netcat-openbsd	
   NETCAT_OPENBSD_VERSION=1.229-1 \
   # renovate: datasource=repology depName=debian_13/openssl
-  OPENSSL_VERSION=3.5.4-1~deb13u2 \
+  OPENSSL_VERSION=3.5.5-1~deb13u2 \
   # renovate: datasource=repology depName=debian_13/patch
   PATCH_VERSION=2.8-2 \
   # renovate: datasource=repology depName=debian_13/procps-ng

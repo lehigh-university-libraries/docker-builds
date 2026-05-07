@@ -1,10 +1,10 @@
-FROM ubuntu:24.04@sha256:d1e2e92c075e5ca139d51a140fff46f84315c0fdce203eab2807c7e495eff4f9
+FROM ubuntu:24.04@sha256:c4a8d5503dfb2a3eb8ab5f807da5bc69a85730fb49b5cfca2330194ebcc41c7b
 
 ARG \
   # renovate: datasource=github-releases depName=gha-runner packageName=actions/runner
-  RUNNER_VERSION=2.331.0 \
+  RUNNER_VERSION=2.334.0 \
   RUNNER_PLATFORM=linux-x64 \
-  RUNNER_SHA=5fcc01bd546ba5c3f1291c2803658ebd3cedb3836489eda3be357d41bfcf28a7
+  RUNNER_SHA=048024cd2c848eb6f14d5646d56c13a4def2ae7ee3ad12122bee960c56f3d271
 
 WORKDIR /app
 
@@ -67,10 +67,10 @@ RUN curl -o actions-runner.tar.gz -L https://github.com/actions/runner/releases/
 
 # install composer
 # renovate: datasource=github-releases depName=custom-composer packageName=composer/composer
-ARG COMPOSER_VERSION=2.9.5
+ARG COMPOSER_VERSION=2.9.7
 ARG COMPOSER_FILE=composer.phar
 ARG COMPOSER_URL=https://getcomposer.org/download/${COMPOSER_VERSION}/${COMPOSER_FILE}
-ARG COMPOSER_SHA256="c86ce603fe836bf0861a38c93ac566c8f1e69ac44b2445d9b7a6a17ea2e9972a"
+ARG COMPOSER_SHA256="d3c6801ea6e5dd291d0f149295a4d0f1539a74d5231958fe8fdaa889a497e6cf"
 RUN curl -sLo "${COMPOSER_FILE}" "${COMPOSER_URL}" && \
     echo "${COMPOSER_SHA256}  ${COMPOSER_FILE}" | sha256sum -c && \
     mv "${COMPOSER_FILE}" /usr/bin/composer && \
@@ -79,7 +79,7 @@ RUN curl -sLo "${COMPOSER_FILE}" "${COMPOSER_URL}" && \
 # install islandora workbench python dependencies
 WORKDIR /workbench
 RUN curl -o workbench.zip -L https://github.com/lehigh-university-libraries/islandora_workbench/archive/refs/heads/simple-field-json.zip && \
-  echo "bb2725b42330f319df09d955b149023f08c00b88d623d8e50a817c6b5f493811  workbench.zip" | sha256sum -c && \
+  echo "9f3ed6353bd880c99a8095ea9c053ecebc48210b9654c24b87dcbc3a1f6a2665  workbench.zip" | sha256sum -c && \
   unzip -oj ./workbench.zip && \
   rm ./workbench.zip && \
   python3 -m build --no-isolation && \
