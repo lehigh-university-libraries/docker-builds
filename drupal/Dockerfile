@@ -1,8 +1,10 @@
-FROM islandora/drupal:6@sha256:882fc39ea49fa0e39e5391b4b85a3556fcd499a72443274495f0f0257d3bf849
+FROM islandora/drupal:6.4.0@sha256:3d475f9f3bb1128a7399dc95e9c403cb0e53bb677e54d5c086ae315a8090a656
 
 ARG \
     # renovate: datasource=repology depName=alpine_3_22/ffmpeg
     FFMPEG_VERSION=6.1.2-r2 \
+    # renovate: datasource=repology depName=alpine_3_22/imagemagick
+    IMAGEMAGICK_VERSION=7.1.2.15-r0 \
     # renovate: datasource=repology depName=alpine_3_22/php83
     PHP_VERSION=8.3.29-r0 \
     # renovate: datasource=repology depName=alpine_3_22/php83-pecl-memcache
@@ -11,17 +13,18 @@ ARG \
     PHP_UPLOAD_VERSION=2.0.2-r1 \
     # renovate: datasource=repology depName=alpine_3_22/php83-pecl-xhprof
     PHP_XHPROF_VERSION=2.3.10-r0 \
-    # renovate: datasource=repology depName=alpine_3_22/rsync
-    RSYNC_VERSION=3.4.2-r0
+    # renovate: datasource=repology depName=alpine_3_22/vips
+    VIPS_VERSION=8.16.1-r0
 
 RUN apk update && \
     apk add --no-cache \
       ffmpeg=="${FFMPEG_VERSION}" \
+      imagemagick=="${IMAGEMAGICK_VERSION}" \
       php83-pdo_sqlite=="${PHP_VERSION}" \
       php83-pecl-uploadprogress=="${PHP_UPLOAD_VERSION}" \
       php83-pecl-memcache=="${PHP_MEMCACHE_VERSION}" \
       php83-pecl-xhprof=="${PHP_XHPROF_VERSION}" \
-      rsync=="${RSYNC_VERSION}" && \
+      vips=="${VIPS_VERSION}" \
     cleanup.sh
 
 ARG \
