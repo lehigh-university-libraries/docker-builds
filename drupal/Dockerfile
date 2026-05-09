@@ -24,7 +24,7 @@ RUN apk update && \
       php83-pecl-uploadprogress=="${PHP_UPLOAD_VERSION}" \
       php83-pecl-memcache=="${PHP_MEMCACHE_VERSION}" \
       php83-pecl-xhprof=="${PHP_XHPROF_VERSION}" \
-      vips=="${VIPS_VERSION}" \
+      vips=="${VIPS_VERSION}" && \
     cleanup.sh
 
 ARG \
