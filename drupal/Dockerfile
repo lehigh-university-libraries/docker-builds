@@ -1,4 +1,4 @@
-FROM islandora/drupal:6.4.0@sha256:3d475f9f3bb1128a7399dc95e9c403cb0e53bb677e54d5c086ae315a8090a656
+FROM islandora/drupal:6.4.1@sha256:c7137a8eee3c5ec9d9c0dd11d0219bd7b99e53d930fd2359acc2e3ca98885be9
 
 ARG \
     # renovate: datasource=repology depName=alpine_3_22/ffmpeg

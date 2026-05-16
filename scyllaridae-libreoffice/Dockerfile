@@ -1,4 +1,4 @@
-FROM islandora/scyllaridae:6@sha256:1f650c1bff8fce4932854408454e9bc5ae76229ce1c467a6d46d0b61540d8e5a
+FROM islandora/scyllaridae:6@sha256:33ba03afccd02fc50557aa2b969876f6c5411f97cee3e77752091e761483d3cb
 
 ARG \
   # renovate: datasource=repology depName=alpine_3_22/openjdk17-jre
