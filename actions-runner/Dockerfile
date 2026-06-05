@@ -97,7 +97,7 @@ RUN curl -o workbench.zip -L https://github.com/lehigh-university-libraries/isla
   python3 -m pip install \
       --ignore-installed \
       dist/*.whl \
-      --break-system-packages
+      --break-system-packages && \
   rm -rf /workbench
 
 RUN mkdir -p -m 755 /etc/apt/keyrings \
