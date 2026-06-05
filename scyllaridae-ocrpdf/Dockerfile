@@ -1,6 +1,6 @@
-FROM islandora/imagemagick:main@sha256:ce3c9fba43e462787831c26e6e464c4528bcca972cdd588d6e2ff5465a77438d AS imagemagick
-FROM islandora/leptonica:main@sha256:6c8860fdee894824459ecd68d97e99628f63e4e1199a6bb8724beb357da98079 AS leptonica
-FROM islandora/scyllaridae:6@sha256:1f650c1bff8fce4932854408454e9bc5ae76229ce1c467a6d46d0b61540d8e5a
+FROM islandora/imagemagick:main@sha256:88b0fcc6bb26b81bfc27b8c92bcc2f2759b78be2149acfc80112eb3a0f78cee0 AS imagemagick
+FROM islandora/leptonica:main@sha256:c549be25c26549acdeb8d7f092f9ab34f9f0d4c6b7269ff3702c9c92634dbcac AS leptonica
+FROM islandora/scyllaridae:6@sha256:573479dafa271f4071739408753c0ec2e8e59bd97b0f496a721e02a565d1948b
 
 ARG \
   # renovate: datasource=repology depName=alpine_3_22/tesseract-ocr
