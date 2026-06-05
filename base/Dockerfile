@@ -41,7 +41,6 @@ ENV \
 
 ARG \
   TARGETARCH=amd64 \
-
   # renovate: datasource=repology depName=debian_13/ca-certificates
   CA_CERTIFICATES_VERSION=20250419 \
   # renovate: datasource=repology depName=debian_13/curl
