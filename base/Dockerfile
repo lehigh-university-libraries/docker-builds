@@ -41,8 +41,7 @@ ENV \
 
 ARG \
   TARGETARCH=amd64 \
-  # renovate: datasource=repology depName=debian_13/bash
-  BASH_VERSION=5.2.37-2 \
+
   # renovate: datasource=repology depName=debian_13/ca-certificates
   CA_CERTIFICATES_VERSION=20250419 \
   # renovate: datasource=repology depName=debian_13/curl
@@ -70,7 +69,6 @@ ARG \
 
 RUN --mount=type=cache,target=/var/cache/apt \
     apt-get update && apt-get install -y \
-        bash=${BASH_VERSION} \
         ca-certificates=${CA_CERTIFICATES_VERSION} \
         curl=${CURL_VERSION} \
         gnupg2=${GNUPG_VERSION} \
