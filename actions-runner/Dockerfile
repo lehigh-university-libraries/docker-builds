@@ -1,4 +1,4 @@
-FROM ubuntu:24.04@sha256:c4a8d5503dfb2a3eb8ab5f807da5bc69a85730fb49b5cfca2330194ebcc41c7b
+FROM ubuntu:24.04@sha256:786a8b558f7be160c6c8c4a54f9a57274f3b4fb1491cf65146521ae77ff1dc54
 
 ARG \
   # renovate: datasource=github-releases depName=gha-runner packageName=actions/runner
@@ -67,10 +67,10 @@ RUN curl -o actions-runner.tar.gz -L https://github.com/actions/runner/releases/
 
 # install composer
 # renovate: datasource=github-releases depName=custom-composer packageName=composer/composer
-ARG COMPOSER_VERSION=2.9.7
+ARG COMPOSER_VERSION=2.10.1
 ARG COMPOSER_FILE=composer.phar
 ARG COMPOSER_URL=https://getcomposer.org/download/${COMPOSER_VERSION}/${COMPOSER_FILE}
-ARG COMPOSER_SHA256="d3c6801ea6e5dd291d0f149295a4d0f1539a74d5231958fe8fdaa889a497e6cf"
+ARG COMPOSER_SHA256="345b9c6a98da5c30dcbd4b0d99fc8710bf0ae98a3898eea18f7b2ad9dec93f06"
 RUN curl -sLo "${COMPOSER_FILE}" "${COMPOSER_URL}" && \
     echo "${COMPOSER_SHA256}  ${COMPOSER_FILE}" | sha256sum -c && \
     mv "${COMPOSER_FILE}" /usr/bin/composer && \
@@ -79,11 +79,25 @@ RUN curl -sLo "${COMPOSER_FILE}" "${COMPOSER_URL}" && \
 # install islandora workbench python dependencies
 WORKDIR /workbench
 RUN curl -o workbench.zip -L https://github.com/lehigh-university-libraries/islandora_workbench/archive/refs/heads/simple-field-json.zip && \
-  echo "9f3ed6353bd880c99a8095ea9c053ecebc48210b9654c24b87dcbc3a1f6a2665  workbench.zip" | sha256sum -c && \
+  echo "1fb98d2d480b357a62f4b5b3e32562a044b4f9e754a6a544e9f2f827c38514a6  workbench.zip" | sha256sum -c && \
   unzip -oj ./workbench.zip && \
   rm ./workbench.zip && \
-  python3 -m build --no-isolation && \
-  python3 -m pip install --no-build-isolation --break-system-packages dist/*.whl && \
+  python3 -m pip install \
+      --upgrade \
+      --ignore-installed \
+      pip setuptools build \
+      --break-system-packages && \
+  python3 -m pip install \
+      --no-cache-dir \
+      --ignore-installed \
+      "urllib3>=1.21.1" \
+      libmagic \
+      --break-system-packages && \
+  python3 -m build && \
+  python3 -m pip install \
+      --ignore-installed \
+      dist/*.whl \
+      --break-system-packages && \
   rm -rf /workbench
 
 RUN mkdir -p -m 755 /etc/apt/keyrings \

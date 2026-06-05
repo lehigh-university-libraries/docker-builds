@@ -1,8 +1,8 @@
-FROM islandora/scyllaridae:6@sha256:1f650c1bff8fce4932854408454e9bc5ae76229ce1c467a6d46d0b61540d8e5a
+FROM islandora/scyllaridae:6@sha256:573479dafa271f4071739408753c0ec2e8e59bd97b0f496a721e02a565d1948b
 
 ARG \
   # renovate: datasource=repology depName=alpine_3_22/openjdk17-jre
-  OPENJDK_VERSION=17.0.18_p8-r0 \
+  OPENJDK_VERSION=17.0.19_p10-r0 \
   # renovate: datasource=repology depName=alpine_3_22/libreoffice
   LIBREOFFICE_VERSION=25.2.5.2-r0 \
   # renovate: datasource=repology depName=alpine_3_22/font-dejavu

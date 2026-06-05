@@ -1,4 +1,4 @@
-FROM debian:trixie-slim@sha256:cedb1ef40439206b673ee8b33a46a03a0c9fa90bf3732f54704f99cb061d2c5a
+FROM debian:trixie-slim@sha256:b6e2a152f22a40ff69d92cb397223c906017e1391a73c952b588e51af8883bf8
 
 LABEL License="MIT License"
 
@@ -41,22 +41,20 @@ ENV \
 
 ARG \
   TARGETARCH=amd64 \
-  # renovate: datasource=repology depName=debian_13/bash
-  BASH_VERSION=5.2.37-2+b8 \
   # renovate: datasource=repology depName=debian_13/ca-certificates
   CA_CERTIFICATES_VERSION=20250419 \
   # renovate: datasource=repology depName=debian_13/curl
-  CURL_VERSION=8.14.1-2+deb13u2 \
+  CURL_VERSION=8.14.1-2+deb13u3 \
   # renovate: datasource=repology depName=debian_13/gnupg2
   GNUPG_VERSION=2.4.7-21+deb13u1 \
   # renovate: datasource=repology depName=debian_13/gzip
   GZIP_VERSION=1.13-1 \
   # renovate: datasource=repology depName=debian_13/jq
-  JQ_VERSION=1.7.1-6+deb13u1 \
+  JQ_VERSION=1.7.1-6+deb13u2 \
   # renovate: datasource=repology depName=debian_13/netcat-openbsd	
   NETCAT_OPENBSD_VERSION=1.229-1 \
   # renovate: datasource=repology depName=debian_13/openssl
-  OPENSSL_VERSION=3.5.5-1~deb13u2 \
+  OPENSSL_VERSION=3.5.6-1~deb13u1 \
   # renovate: datasource=repology depName=debian_13/patch
   PATCH_VERSION=2.8-2 \
   # renovate: datasource=repology depName=debian_13/procps-ng
@@ -70,7 +68,6 @@ ARG \
 
 RUN --mount=type=cache,target=/var/cache/apt \
     apt-get update && apt-get install -y \
-        bash=${BASH_VERSION} \
         ca-certificates=${CA_CERTIFICATES_VERSION} \
         curl=${CURL_VERSION} \
         gnupg2=${GNUPG_VERSION} \
@@ -87,18 +84,18 @@ RUN --mount=type=cache,target=/var/cache/apt \
 SHELL ["/bin/bash", "-euo", "pipefail", "-c"]
 
 # renovate: datasource=github-releases depName=s6-overlay packageName=just-containers/s6-overlay
-ARG S6_VERSION=3.2.2.0
+ARG S6_VERSION=3.2.3.0
 ARG S6_BASE_URL="https://github.com/just-containers/s6-overlay/releases/download/v${S6_VERSION}"
 ARG S6_OVERLAY_NOARCH=s6-overlay-noarch.tar.xz
-ARG S6_OVERLAY_NOARCH_SHA256="85848f6baab49fb7832a5557644c73c066899ed458dd1601035cf18e7c759f26"
+ARG S6_OVERLAY_NOARCH_SHA256="b720f9d9340efc8bb07528b9743813c836e4b02f8693d90241f047998b4c53cf"
 ARG S6_OVERLAY_SYMLINKS_ARCH=s6-overlay-symlinks-arch.tar.xz
-ARG S6_OVERLAY_SYMLINKS_ARCH_SHA256="9364479e3f9f4d42425312ced93e25ca2a8896d0405ac747d815ca56338321f0"
+ARG S6_OVERLAY_SYMLINKS_ARCH_SHA256="8e8407a0cf84fd8884cc7de52049bdce71bf3993f07cbaa2a7c8cebc9581d805"
 ARG S6_OVERLAY_SYMLINKS_NOARCH=s6-overlay-symlinks-noarch.tar.xz
-ARG S6_OVERLAY_SYMLINKS_NOARCH_SHA256="fae2b2fd6da3067a5f484e915dc5744e2b152abc81721a72f3d2e9b2d6657204"
+ARG S6_OVERLAY_SYMLINKS_NOARCH_SHA256="a60dc5235de3ecbcf874b9c1f18d73263ab99b289b9329aa950e8729c4789f0e"
 ARG S6_OVERLAY_AMD64=s6-overlay-x86_64.tar.xz
-ARG S6_OVERLAY_AMD64_SHA256="5a09e2f1878dc5f7f0211dd7bafed3eee1afe4f813e872fff2ab1957f266c7c0"
+ARG S6_OVERLAY_AMD64_SHA256="a93f02882c6ed46b21e7adb5c0add86154f01236c93cd82c7d682722e8840563"
 ARG S6_OVERLAY_ARM64=s6-overlay-aarch64.tar.xz
-ARG S6_OVERLAY_ARM64_SHA256="50a5d4919e688fafc95ce9cf0055a46f74847517bcf08174bac811de234ec7d2"
+ARG S6_OVERLAY_ARM64_SHA256="0952056ff913482163cc30e35b2e944b507ba1025d78f5becbb89367bf344581"
 
 # Install s6.
 RUN --mount=type=bind,source=rootfs/usr/local/bin/download.sh,target=/usr/local/bin/download.sh \

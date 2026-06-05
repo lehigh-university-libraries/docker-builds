@@ -1,5 +1,5 @@
-FROM islandora/scyllaridae:6.4.0@sha256:fb43a9f2cd0627eed20059e1438a0b07e3a5808a5e5527e2e7249802e564e3df AS scyllaridae
-FROM ghcr.io/ggml-org/whisper.cpp:main-cuda@sha256:4a63de6d770163700e32bd300158bee5eac523ee5ab5ab165efe4b44ed8e6a5e
+FROM islandora/scyllaridae:6.4.2@sha256:573479dafa271f4071739408753c0ec2e8e59bd97b0f496a721e02a565d1948b AS scyllaridae
+FROM ghcr.io/ggml-org/whisper.cpp:main-cuda@sha256:1d1d9a899ee7af679db74483a802245b09d37058c1e02ce438e7124e795268ba
 
 ARG \
   # renovate: datasource=repology depName=ubuntu_22_04/gosu
