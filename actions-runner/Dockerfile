@@ -82,8 +82,7 @@ RUN curl -o workbench.zip -L https://github.com/lehigh-university-libraries/isla
   echo "1fb98d2d480b357a62f4b5b3e32562a044b4f9e754a6a544e9f2f827c38514a6  workbench.zip" | sha256sum -c && \
   unzip -oj ./workbench.zip && \
   rm ./workbench.zip && \
-  python3 -m build --no-isolation && \
-  python3 -m pip install --no-build-isolation --break-system-packages dist/*.whl && \
+  python3 -m pip install --user --break-system-packages . && \
   rm -rf /workbench
 
 RUN mkdir -p -m 755 /etc/apt/keyrings \
