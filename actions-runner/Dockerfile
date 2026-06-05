@@ -82,7 +82,22 @@ RUN curl -o workbench.zip -L https://github.com/lehigh-university-libraries/isla
   echo "1fb98d2d480b357a62f4b5b3e32562a044b4f9e754a6a544e9f2f827c38514a6  workbench.zip" | sha256sum -c && \
   unzip -oj ./workbench.zip && \
   rm ./workbench.zip && \
-  python3 -m pip install --user --break-system-packages . && \
+  python3 -m pip install \
+      --upgrade \
+      --ignore-installed \
+      pip setuptools build \
+      --break-system-packages && \
+  python3 -m pip install \
+      --no-cache-dir \
+      --ignore-installed \
+      "urllib3>=1.21.1" \
+      libmagic \
+      --break-system-packages && \
+  python3 -m build && \
+  python3 -m pip install \
+      --ignore-installed \
+      dist/*.whl \
+      --break-system-packages
   rm -rf /workbench
 
 RUN mkdir -p -m 755 /etc/apt/keyrings \
