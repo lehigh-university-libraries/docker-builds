@@ -1,29 +1,29 @@
-FROM islandora/drupal:6.4.2@sha256:2b7b41ec71f14af88441ec9ffb076c5927e5c1c91484937cd7396b32115db177
+FROM islandora/drupal:alpine-3-24@sha256:d5fadb80284e8f59b11e8d8e5f6a3ea363b879838e86447817fb6702316b2e64
 
 ARG \
-    # renovate: datasource=repology depName=alpine_3_22/ffmpeg
-    FFMPEG_VERSION=6.1.2-r2 \
-    # renovate: datasource=repology depName=alpine_3_22/imagemagick
-    IMAGEMAGICK_VERSION=7.1.2.15-r0 \
-    # renovate: datasource=repology depName=alpine_3_22/php83
-    PHP_VERSION=8.3.29-r0 \
-    # renovate: datasource=repology depName=alpine_3_22/php83-pecl-memcache
-    PHP_MEMCACHE_VERSION=8.2-r0 \
-    # renovate: datasource=repology depName=alpine_3_22/php83-pecl-uploadprogress
-    PHP_UPLOAD_VERSION=2.0.2-r1 \
-    # renovate: datasource=repology depName=alpine_3_22/php83-pecl-xhprof
-    PHP_XHPROF_VERSION=2.3.10-r0 \
-    # renovate: datasource=repology depName=alpine_3_22/vips
-    VIPS_VERSION=8.16.1-r0
+    # renovate: datasource=repology depName=alpine_3_24/ffmpeg
+    FFMPEG_VERSION=8.1.2-r0 \
+    # renovate: datasource=repology depName=alpine_3_24/imagemagick
+    IMAGEMAGICK_VERSION=7.1.2.27-r0 \
+    # renovate: datasource=repology depName=alpine_3_24/php84
+    PHP_VERSION=8.4.24-r0 \
+    # renovate: datasource=repology depName=alpine_3_24/php84-pecl-memcache
+    PHP_MEMCACHE_VERSION=8.2-r1 \
+    # renovate: datasource=repology depName=alpine_3_24/php84-pecl-uploadprogress
+    PHP_UPLOAD_VERSION=2.0.2-r2 \
+    # renovate: datasource=repology depName=alpine_3_24/php84-pecl-xhprof
+    PHP_XHPROF_VERSION=2.3.10-r1 \
+    # renovate: datasource=repology depName=alpine_3_24/vips
+    VIPS_VERSION=8.18.2-r0
 
 RUN apk update && \
     apk add --no-cache \
       ffmpeg=="${FFMPEG_VERSION}" \
       imagemagick=="${IMAGEMAGICK_VERSION}" \
-      php83-pdo_sqlite=="${PHP_VERSION}" \
-      php83-pecl-uploadprogress=="${PHP_UPLOAD_VERSION}" \
-      php83-pecl-memcache=="${PHP_MEMCACHE_VERSION}" \
-      php83-pecl-xhprof=="${PHP_XHPROF_VERSION}" \
+      php84-pdo_sqlite=="${PHP_VERSION}" \
+      php84-pecl-uploadprogress=="${PHP_UPLOAD_VERSION}" \
+      php84-pecl-memcache=="${PHP_MEMCACHE_VERSION}" \
+      php84-pecl-xhprof=="${PHP_XHPROF_VERSION}" \
       vips=="${VIPS_VERSION}" && \
     cleanup.sh
 
