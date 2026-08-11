@@ -1,5 +1,14 @@
 FROM islandora/scyllaridae:6.4.2@sha256:573479dafa271f4071739408753c0ec2e8e59bd97b0f496a721e02a565d1948b AS scyllaridae
-FROM ghcr.io/ggml-org/whisper.cpp:main-cuda@sha256:1d1d9a899ee7af679db74483a802245b09d37058c1e02ce438e7124e795268ba
+
+# Pinned to the last main-cuda build before ggml-org/whisper.cpp#3371 (2025-08-13)
+# bumped CUDA to 13.0 and dropped compute_50 support. This build's default
+# CMAKE_CUDA_ARCHITECTURES includes "50-virtual" (PTX-only), which the NVIDIA
+# driver JITs for any GPU with compute capability >= 5.0 - covering Tesla M60
+# (5.2). Every main-cuda tag built after that commit fails on M60 with
+# "no kernel image is available for execution on the device". DO NOT let
+# renovate bump this digest - newer main-cuda builds break Maxwell/M60.
+# renovate: enabled=false
+FROM ghcr.io/ggml-org/whisper.cpp@sha256:b6c7f057ddb2260c93737e077bf6c9de60b510cab77c0cfd3f18fcfb5da4dcf2
 
 ARG \
   # renovate: datasource=repology depName=ubuntu_22_04/gosu
@@ -33,4 +42,3 @@ ENV \
   WHISPER_THREADS=4
 
 ENTRYPOINT ["/app/docker-entrypoint.sh"]
-
