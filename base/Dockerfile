@@ -1,4 +1,4 @@
-FROM debian:trixie-slim@sha256:b6e2a152f22a40ff69d92cb397223c906017e1391a73c952b588e51af8883bf8
+FROM debian:trixie-slim@sha256:d7e12182ce18b85b93007c1dedf31f2d29e01ccf3182cc4017c709b6259bc132
 
 LABEL License="MIT License"
 
@@ -44,23 +44,23 @@ ARG \
   # renovate: datasource=repology depName=debian_13/ca-certificates
   CA_CERTIFICATES_VERSION=20250419 \
   # renovate: datasource=repology depName=debian_13/curl
-  CURL_VERSION=8.14.1-2+deb13u3 \
+  CURL_VERSION=8.14.1-2+deb13u4 \
   # renovate: datasource=repology depName=debian_13/gnupg2
   GNUPG_VERSION=2.4.7-21+deb13u1 \
   # renovate: datasource=repology depName=debian_13/gzip
   GZIP_VERSION=1.13-1 \
   # renovate: datasource=repology depName=debian_13/jq
-  JQ_VERSION=1.7.1-6+deb13u2 \
+  JQ_VERSION=1.7.1-6+deb13u3 \
   # renovate: datasource=repology depName=debian_13/netcat-openbsd	
   NETCAT_OPENBSD_VERSION=1.229-1 \
   # renovate: datasource=repology depName=debian_13/openssl
-  OPENSSL_VERSION=3.5.6-1~deb13u1 \
+  OPENSSL_VERSION=3.5.7-1~deb13u2 \
   # renovate: datasource=repology depName=debian_13/patch
   PATCH_VERSION=2.8-2 \
   # renovate: datasource=repology depName=debian_13/procps-ng
   PROCPS_VERSION=2:4.0.4-9 \
   # renovate: datasource=repology depName=debian_13/util-linux
-  UTIL_LINUX_VERSION=2.41-5 \
+  UTIL_LINUX_VERSION=2.41.5-0+deb13u1 \
   # renovate: datasource=repology depName=debian_13/wget
   WGET_VERSION=1.25.0-2 \
   # renovate: datasource=repology depName=debian_13/wget
@@ -84,7 +84,7 @@ RUN --mount=type=cache,target=/var/cache/apt \
 SHELL ["/bin/bash", "-euo", "pipefail", "-c"]
 
 # renovate: datasource=github-releases depName=s6-overlay packageName=just-containers/s6-overlay
-ARG S6_VERSION=3.2.3.0
+ARG S6_VERSION=3.2.3.2
 ARG S6_BASE_URL="https://github.com/just-containers/s6-overlay/releases/download/v${S6_VERSION}"
 ARG S6_OVERLAY_NOARCH=s6-overlay-noarch.tar.xz
 ARG S6_OVERLAY_NOARCH_SHA256="b720f9d9340efc8bb07528b9743813c836e4b02f8693d90241f047998b4c53cf"
