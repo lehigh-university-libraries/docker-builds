@@ -1,4 +1,4 @@
-FROM ubuntu:24.04@sha256:786a8b558f7be160c6c8c4a54f9a57274f3b4fb1491cf65146521ae77ff1dc54
+FROM ubuntu:26.04@sha256:513c074113a871b51a8d16ab445c88779d6452d937a164fb5cc479f32668a41d
 
 ARG \
   # renovate: datasource=github-releases depName=gha-runner packageName=actions/runner
