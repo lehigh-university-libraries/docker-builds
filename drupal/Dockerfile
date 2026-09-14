@@ -1,4 +1,4 @@
-FROM islandora/drupal:7.0.6@sha256:37093bc4272c5a3d3ba514f02b2a4f466b865a9653213bd2ebfc6b185c79aa2e
+FROM islandora/drupal:7.0.16@sha256:699e98c8dcb5e6f51a113053af47fd9a2ec805fa7376f04d89b63edbe0811b73
 
 ARG \
     # renovate: datasource=repology depName=alpine_3_24/ffmpeg
@@ -30,7 +30,7 @@ RUN apk update && \
 ARG \
   TARGETARCH \
   # renovate: datasource=github-releases depName=crosswalk packageName=lehigh-university-libraries/crosswalk
-  CROSSWALK_VERSION=0.3.9 \
+  CROSSWALK_VERSION=0.6.0 \
   CROSSWALK_BASE_URL="https://github.com/lehigh-university-libraries/crosswalk/releases/download/v${CROSSWALK_VERSION}" \
   CROSSWALK_AMD64=crosswalk_Linux_x86_64.tar.gz   \
   CROSSWALK_AMD64_SHA256="77b29f8f34c030d6b52194b7d9dcb41b087810a984be43f8c9615316658ef2fe" \
