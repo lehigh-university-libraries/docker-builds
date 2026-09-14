@@ -1,4 +1,4 @@
-FROM debian:trixie-slim@sha256:b6e2a152f22a40ff69d92cb397223c906017e1391a73c952b588e51af8883bf8
+FROM debian:trixie-slim@sha256:d7e12182ce18b85b93007c1dedf31f2d29e01ccf3182cc4017c709b6259bc132
 
 LABEL License="MIT License"
 
@@ -84,7 +84,7 @@ RUN --mount=type=cache,target=/var/cache/apt \
 SHELL ["/bin/bash", "-euo", "pipefail", "-c"]
 
 # renovate: datasource=github-releases depName=s6-overlay packageName=just-containers/s6-overlay
-ARG S6_VERSION=3.2.3.0
+ARG S6_VERSION=3.2.3.2
 ARG S6_BASE_URL="https://github.com/just-containers/s6-overlay/releases/download/v${S6_VERSION}"
 ARG S6_OVERLAY_NOARCH=s6-overlay-noarch.tar.xz
 ARG S6_OVERLAY_NOARCH_SHA256="b720f9d9340efc8bb07528b9743813c836e4b02f8693d90241f047998b4c53cf"
