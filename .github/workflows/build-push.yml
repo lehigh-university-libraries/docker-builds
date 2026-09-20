@@ -5,7 +5,7 @@ on:
 
 jobs:
   detect-changes:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     outputs:
       base-matrix: ${{ steps.filter.outputs.base-matrix }}
       base-deps-matrix: ${{ steps.filter.outputs.base-deps-matrix }}
