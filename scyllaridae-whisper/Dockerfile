@@ -1,4 +1,4 @@
-FROM islandora/scyllaridae:6.4.2@sha256:573479dafa271f4071739408753c0ec2e8e59bd97b0f496a721e02a565d1948b AS scyllaridae
+FROM islandora/scyllaridae:6.4.3@sha256:0b9ec5d134d8da39a1a8326ee781faa5450022b2b1d9ad43f68530009d835984 AS scyllaridae
 
 # Pinned to the last main-cuda build before ggml-org/whisper.cpp#3371 (2025-08-13)
 # bumped CUDA to 13.0 and dropped compute_50 support. This build's default
