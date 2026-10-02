@@ -1,5 +1,8 @@
 # Docker builds
 
+> [!WARNING]
+> Moved to https://github.com/lehigh-university-libraries/buildkit
+
 Various docker containers used within Lehigh Library Technology's infrastructure.
 
 ## Structure
