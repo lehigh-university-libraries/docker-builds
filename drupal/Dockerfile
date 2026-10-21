@@ -4,9 +4,9 @@ ARG \
     # renovate: datasource=repology depName=alpine_3_24/ffmpeg
     FFMPEG_VERSION=8.1.2-r0 \
     # renovate: datasource=repology depName=alpine_3_24/imagemagick
-    IMAGEMAGICK_VERSION=7.1.2.27-r0 \
+    IMAGEMAGICK_VERSION=7.1.2.34-r0 \
     # renovate: datasource=repology depName=alpine_3_24/php84
-    PHP_VERSION=8.4.24-r0 \
+    PHP_VERSION=8.4.27-r0 \
     # renovate: datasource=repology depName=alpine_3_24/php84-pecl-memcache
     PHP_MEMCACHE_VERSION=8.2-r1 \
     # renovate: datasource=repology depName=alpine_3_24/php84-pecl-uploadprogress
