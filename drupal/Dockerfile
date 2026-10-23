@@ -1,4 +1,4 @@
-FROM islandora/drupal:renovate.apk-packages@sha256:9e27058fe0c185115e4e72dd203b548a36f9bccc6dac401d3de8db0bf6948341
+FROM islandora/drupal:7.0.23@sha256:5467f13f472340e0f51e71bebcae7d66deaad05112b226593dedb1318aeda574
 
 ARG \
     # renovate: datasource=repology depName=alpine_3_24/ffmpeg
