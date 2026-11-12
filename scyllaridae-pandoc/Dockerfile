@@ -1,5 +1,5 @@
-FROM islandora/scyllaridae:6@sha256:573479dafa271f4071739408753c0ec2e8e59bd97b0f496a721e02a565d1948b AS scyllaridae
-FROM pandoc/latex:3.9-ubuntu@sha256:601777bf5e7b9642ce7acdd46eef1daa69b4efdc47a539254d8fc0942d6a7cfd AS pandoc
+FROM islandora/scyllaridae:6@sha256:0b9ec5d134d8da39a1a8326ee781faa5450022b2b1d9ad43f68530009d835984 AS scyllaridae
+FROM pandoc/latex:3.11-ubuntu@sha256:24cd38c7f0e9f7020cb3faaa5122eca719f5e72039f45d15b699bb3168055d44 AS pandoc
 
 ARG \
   # renovate: datasource=repology depName=ubuntu_24_04/curl
