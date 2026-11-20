@@ -1,12 +1,12 @@
-FROM islandora/imagemagick:main@sha256:88b0fcc6bb26b81bfc27b8c92bcc2f2759b78be2149acfc80112eb3a0f78cee0 AS imagemagick
-FROM islandora/leptonica:main@sha256:c549be25c26549acdeb8d7f092f9ab34f9f0d4c6b7269ff3702c9c92634dbcac AS leptonica
-FROM islandora/scyllaridae:6@sha256:573479dafa271f4071739408753c0ec2e8e59bd97b0f496a721e02a565d1948b
+FROM islandora/imagemagick:main@sha256:9df58d096d18820bbe3b71aa576011d73eb2d2ab39a00a14552efbb4854dbd0e AS imagemagick
+FROM islandora/leptonica:main@sha256:47c1571477abfabf96a7523592d7a4b8bef8e3a2ff37cff53f4256d08d4c5fe3 AS leptonica
+FROM islandora/scyllaridae:6@sha256:0b9ec5d134d8da39a1a8326ee781faa5450022b2b1d9ad43f68530009d835984
 
 ARG \
   # renovate: datasource=repology depName=alpine_3_22/tesseract-ocr
   TESSERACT_VERSION=5.5.0-r2 \
   # renovate: datasource=repology depName=alpine_3_22/jq
-  JQ_VERSION=1.8.1-r0 \
+  JQ_VERSION=1.8.2-r0 \
   # renovate: datasource=repology depName=alpine_3_22/ghostscript
   GHOSTSCRIPT_VERSION=10.05.1-r0 \
   # renovate: datasource=repology depName=alpine_3_22/poppler-utils
